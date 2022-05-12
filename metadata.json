@@ -5,9 +5,7 @@
   "summary": "An assortment of custom Puppet functions, facts, types and providers, tasks, and plans meant to supplement the stdlib module by Puppet.",
   "license": "MIT",
   "source": "https://github.com/mschuchard/extended_stdlib",
-  "dependencies": [
-
-  ],
+  "dependencies": [],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
