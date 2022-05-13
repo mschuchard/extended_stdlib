@@ -2,7 +2,7 @@
 
 # https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
 Puppet::Functions.create_function(:"extended_stdlib::drop") do
-  # Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
+  # @summary Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
   # @param [Array] the_array The array to remove the first num elements from.
   # @param [Integer] num The number of first elements to remove from the array.
   # @return [Array] Returns the array with the first num elements removed.
