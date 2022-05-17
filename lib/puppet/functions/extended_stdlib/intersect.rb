@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
+# Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to Ruby >= 3.0 requirement.
 Puppet::Functions.create_function(:"extended_stdlib::intersect") do
-  # @summary Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to Ruby >= 3.0 requirement.
-  # @param [Array] a_array The first array to determine if intersects.
-  # @param [Array] other_array The second array to determine if intersects.
+  # @param a_array The first array to determine if intersects.
+  # @param other_array The second array to determine if intersects.
   # @return [Boolean] Returns whether the two arrays intersect.
   # @example Determine if first arry and second array intersect.
   #   intersect([1, 2, 3], [3, 4, 5]) => true
