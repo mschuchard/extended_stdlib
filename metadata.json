@@ -1,52 +1,44 @@
 {
   "name": "mschuchard-extended_stdlib",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "author": "Matthew Schuchard",
   "summary": "An assortment of custom Puppet functions, facts, types and providers, tasks, and plans meant to supplement the stdlib module by Puppet.",
   "license": "MIT",
   "source": "https://github.com/mschuchard/extended_stdlib",
-  "dependencies": [],
+  "project_page": "https://github.com/mschuchard/extended_stdlib",
+  "issues_url": "https://github.com/mschuchard/extended_stdlib/issues",
+  "dependencies": [
+
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
+        "7",
         "8"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10"
+        "9",
+        "10",
+        "11"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04"
-      ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "29"
+        "18.04",
+        "20.04",
+        "22.04"
       ]
     }
   ],
