@@ -5,7 +5,7 @@ Puppet::Functions.create_function(:"extended_stdlib::intersect") do
   # @param a_array The first array to determine if intersects.
   # @param other_array The second array to determine if intersects.
   # @return [Boolean] Returns whether the two arrays intersect.
-  # @example Determine if first arry and second array intersect.
+  # @example Determine if first array and second array intersect.
   #   intersect([1, 2, 3], [3, 4, 5]) => true
   #   intersect([1, 2, 3], [5, 6, 7]) => false
   dispatch :intersect do

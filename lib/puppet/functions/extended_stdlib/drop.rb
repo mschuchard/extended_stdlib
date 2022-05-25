@@ -5,7 +5,7 @@ Puppet::Functions.create_function(:"extended_stdlib::drop") do
   # @param the_array The array to remove the first num elements from.
   # @param num The number of first elements to remove from the array.
   # @return [Array] Returns the array with the first num elements removed.
-  # @example Remove the first 0, 1, and 2 elements from an array, and return that array.
+  # @example Remove the first 0, 1, or 2 elements from an array, and return that array.
   #   drop([0, 1, 2, 3, 4, 5], 0) => [0, 1, 2, 3, 4, 5]
   #   drop([0, 1, 2, 3, 4, 5], 1) => [1, 2, 3, 4, 5]
   #   drop([0, 1, 2, 3, 4, 5], 2) => [2, 3, 4, 5]
