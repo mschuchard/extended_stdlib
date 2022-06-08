@@ -8,57 +8,57 @@ Puppet::Functions.create_function(:"extended_stdlib::none") do
   #   none([undef, false]) => true
   #   none([undef, 0, false]) => false
   #   none([]) => true
-  dispatch :none_Array do
+  dispatch :array do
     param 'Array', :the_array
     return_type 'Boolean'
   end
 
-  dispatch :none_Hash_2 do
-    param 'Hash[Any, Any]', :the_hash
-    block_param 'Callable[2,2]', :block
-    return_type 'Boolean'
-  end
-
-  dispatch :none_Hash_1 do
+  dispatch :hash_single_arg do
     param 'Hash[Any, Any]', :the_hash
     block_param 'Callable[1,1]', :block
     return_type 'Boolean'
   end
 
-  dispatch :none_Enumerable_2 do
-    param 'Iterable', :enumerable
+  dispatch :hash_double_arg do
+    param 'Hash[Any, Any]', :the_hash
     block_param 'Callable[2,2]', :block
     return_type 'Boolean'
   end
 
-  dispatch :none_Enumerable_1 do
+  dispatch :enumerable_single_arg do
     param 'Iterable', :enumerable
     block_param 'Callable[1,1]', :block
     return_type 'Boolean'
   end
 
-  def none_Array(the_array)
+  dispatch :enumerable_double_arg do
+    param 'Iterable', :enumerable
+    block_param 'Callable[2,2]', :block
+    return_type 'Boolean'
+  end
+
+  def array(the_array)
     the_array.none?
   end
 
-  def none_Hash_1(the_hash)
-    the_hash.each_pair.none? { |x| yield(x) }
+  def hash_single_arg(the_hash)
+    the_hash.each_pair.none? { |pair| yield(pair) }
   end
 
-  def none_Hash_2(the_hash)
-    the_hash.each_pair.none? { |x, y| yield(x, y) }
+  def hash_double_arg(the_hash)
+    the_hash.each_pair.none? { |pair_key, pair_value| yield(pair_key, pair_value) }
   end
 
-  def none_Enumerable_1(enumerable)
-    Puppet::Pops::Types::Iterable.asserted_iterable(self, enumerable).none? { |e| yield(e) }
+  def enumerable_single_arg(enumerable)
+    Puppet::Pops::Types::Iterable.asserted_iterable(self, enumerable).none? { |enum| yield(enum) }
   end
 
-  def none_Enumerable_2(enumerable)
+  def enumerable_double_arg(enumerable)
     enum = Puppet::Pops::Types::Iterable.asserted_iterable(self, enumerable)
     if enum.hash_style?
       enum.none? { |entry| yield(*entry) }
     else
-      enum.each_with_index { |e, i| return false if yield(i, e) }
+      enum.each_with_index { |the_enum, index| return false if yield(index, the_enum) }
       true
     end
   end

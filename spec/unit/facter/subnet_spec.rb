@@ -12,6 +12,6 @@ describe :subnet, type: :fact do
   end
 
   it 'returns the subnet from the ip address' do
-    expect(Facter.value(:networking)['ip']).to match(/#{fact.value}/)
+    expect(Facter.value(:networking)['ip']).to match(%r{#{fact.value}})
   end
 end
