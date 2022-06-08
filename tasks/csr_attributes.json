@@ -1,0 +1,26 @@
+{
+  "description": "Modifies CSR attributes on a client server.",
+  "input_method": "stdin",
+  "parameters": {
+    "extension_requests": {
+      "description": "The desired extension requests (permanent data to be embedded in a signed certificate). Note that input values will overwrite current values with the same paired key.",
+      "type": "Hash",
+      "default": "{}"
+    },
+    "custom_attributes": {
+      "description": "The desired custom attributes (transient data used for pre-validating requests). Note that input values will overwrite current values with the same paired key.",
+      "type": "Hash",
+      "default": "{}"
+    },
+    "purge_extension_requests": {
+      "description": "Whether or not to purge the existing extension requests in the CSR attributes when updating.",
+      "type": "Boolean",
+      "default": false
+    },
+    "purge_custom_attributes": {
+      "description": "Whether or not to purge the existing custom attributes in the CSR attributes instead when updating.",
+      "type": "Boolean",
+      "default": false
+    }
+  }
+}
