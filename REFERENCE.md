@@ -11,7 +11,15 @@
 * [`extended_stdlib::intersect`](#extended_stdlibintersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to 
 * [`extended_stdlib::minmax`](#extended_stdlibminmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
 * [`extended_stdlib::none`](#extended_stdlibnone): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
+* [`extended_stdlib::product`](#extended_stdlibproduct): Computes and returns all combinations of elements from all of the Arrays
+* [`extended_stdlib::sample`](#extended_stdlibsample): Returns random elements from an Array. Note that the return is non-deterministic.
 * [`extended_stdlib::subset`](#extended_stdlibsubset): Returns a boolean of whether the first hash is a subset of the second hash
+* [`extended_stdlib::sum`](#extended_stdlibsum): Returns the sum of an optional summand with all elements of an Array.
+* [`extended_stdlib::transpose`](#extended_stdlibtranspose): Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
+
+### Tasks
+
+* [`csr_attributes`](#csr_attributes): Modifies CSR attributes on a client server.
 
 ## Functions
 
@@ -69,7 +77,7 @@ Returns an Array containing all but the first num element of the array, where nu
 
 #### Examples
 
-##### Remove the first 0, 1, and 2 elements from an array, and return that array.
+##### Remove the first 0, 1, or 2 elements from an array, and return that array.
 
 ```puppet
 drop([0, 1, 2, 3, 4, 5], 0) => [0, 1, 2, 3, 4, 5]
@@ -85,7 +93,7 @@ Returns: `Array` Returns the array with the first num elements removed.
 
 ##### Examples
 
-###### Remove the first 0, 1, and 2 elements from an array, and return that array.
+###### Remove the first 0, 1, or 2 elements from an array, and return that array.
 
 ```puppet
 drop([0, 1, 2, 3, 4, 5], 0) => [0, 1, 2, 3, 4, 5]
@@ -113,7 +121,7 @@ Returns true if the array and other_array have at least one element in common, o
 
 #### Examples
 
-##### Determine if first arry and second array intersect.
+##### Determine if first array and second array intersect.
 
 ```puppet
 intersect([1, 2, 3], [3, 4, 5]) => true
@@ -128,7 +136,7 @@ Returns: `Boolean` Returns whether the two arrays intersect.
 
 ##### Examples
 
-###### Determine if first arry and second array intersect.
+###### Determine if first array and second array intersect.
 
 ```puppet
 intersect([1, 2, 3], [3, 4, 5]) => true
@@ -209,6 +217,24 @@ Data type: `Array`
 
 The array containing the elements to test the criterion upon. the_hash The hash containing the entries to test the criterion upon. block The optional lambda block to specify the criterion (otherwise directly tests falsiness).
 
+#### `extended_stdlib::none(Hash[Any, Any] $the_hash, Callable[1,1] &$block)`
+
+The extended_stdlib::none function.
+
+Returns: `Boolean`
+
+##### `the_hash`
+
+Data type: `Hash[Any, Any]`
+
+
+
+##### `&block`
+
+Data type: `Callable[1,1]`
+
+
+
 #### `extended_stdlib::none(Hash[Any, Any] $the_hash, Callable[2,2] &$block)`
 
 The extended_stdlib::none function.
@@ -227,15 +253,15 @@ Data type: `Callable[2,2]`
 
 
 
-#### `extended_stdlib::none(Hash[Any, Any] $the_hash, Callable[1,1] &$block)`
+#### `extended_stdlib::none(Iterable $enumerable, Callable[1,1] &$block)`
 
 The extended_stdlib::none function.
 
 Returns: `Boolean`
 
-##### `the_hash`
+##### `enumerable`
 
-Data type: `Hash[Any, Any]`
+Data type: `Iterable`
 
 
 
@@ -263,23 +289,117 @@ Data type: `Callable[2,2]`
 
 
 
-#### `extended_stdlib::none(Iterable $enumerable, Callable[1,1] &$block)`
+### <a name="extended_stdlibproduct"></a>`extended_stdlib::product`
 
-The extended_stdlib::none function.
+Type: Ruby 4.x API
 
-Returns: `Boolean`
+Computes and returns all combinations of elements from all of the Arrays
 
-##### `enumerable`
+#### Examples
 
-Data type: `Iterable`
+##### Returns original Array if only one is specified.
 
+```puppet
+product([[0, 1, 2]]) => [[0, 1, 2]]
+```
 
+##### Return the product of two Arrays.
 
-##### `&block`
+```puppet
+product([[0, 1, 2], [3, 4]]) => [[0, 3], [0, 4], [1, 3], [1, 4], [2, 3], [2, 4]]
+```
 
-Data type: `Callable[1,1]`
+##### Return the product of three Arrays.
 
+```puppet
+product([[0, 1, 2], [3, 4], [5, 6]]) => [[0, 3, 5], [0, 3, 6], [0, 4, 5], [0, 4, 6], [1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]
+```
 
+#### `extended_stdlib::product(Array *$arrays)`
+
+Computes and returns all combinations of elements from all of the Arrays
+
+Returns: `Array[Array]` The nested Array containing the product of the Arrays' elements.
+
+##### Examples
+
+###### Returns original Array if only one is specified.
+
+```puppet
+product([[0, 1, 2]]) => [[0, 1, 2]]
+```
+
+###### Return the product of two Arrays.
+
+```puppet
+product([[0, 1, 2], [3, 4]]) => [[0, 3], [0, 4], [1, 3], [1, 4], [2, 3], [2, 4]]
+```
+
+###### Return the product of three Arrays.
+
+```puppet
+product([[0, 1, 2], [3, 4], [5, 6]]) => [[0, 3, 5], [0, 3, 6], [0, 4, 5], [0, 4, 6], [1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]
+```
+
+##### `*arrays`
+
+Data type: `Array`
+
+One or more Arrays of which to compute the products. Issue with required_repeated_param in Puppet requires this to be nested Array.
+
+### <a name="extended_stdlibsample"></a>`extended_stdlib::sample`
+
+Type: Ruby 4.x API
+
+Returns random elements from an Array. Note that the return is non-deterministic.
+
+#### Examples
+
+##### Return a random element from an Array.
+
+```puppet
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) => 3
+```
+
+##### Return multiple random elements from an Array.
+
+```puppet
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3) => [8, 9, 2]
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6) => [9, 6, 10, 3, 1, 4]
+```
+
+#### `extended_stdlib::sample(Array[1] $the_array, Optional[Integer] $num_elements)`
+
+Returns random elements from an Array. Note that the return is non-deterministic.
+
+Returns: `Variant[Array, Any]` The random element or Array of random elements selected from the Array.
+
+##### Examples
+
+###### Return a random element from an Array.
+
+```puppet
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) => 3
+```
+
+###### Return multiple random elements from an Array.
+
+```puppet
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3) => [8, 9, 2]
+sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6) => [9, 6, 10, 3, 1, 4]
+```
+
+##### `the_array`
+
+Data type: `Array[1]`
+
+The Array from which to select random elements.
+
+##### `num_elements`
+
+Data type: `Optional[Integer]`
+
+The number of random elements to select from the Array.
 
 ### <a name="extended_stdlibsubset"></a>`extended_stdlib::subset`
 
@@ -332,4 +452,148 @@ The hash to determine if hash is a subset of this hash.
 Data type: `Optional[Boolean]`
 
 Specifies if the subset determination should be for a proper subset or regular subset.
+
+### <a name="extended_stdlibsum"></a>`extended_stdlib::sum`
+
+Type: Ruby 4.x API
+
+Returns the sum of an optional summand with all elements of an Array.
+
+#### Examples
+
+##### Returns sum of Array of Integers.
+
+```puppet
+sum([0, 1, 2, 3]) => 6
+```
+
+##### Returns sum of Integer and Array of Integers.
+
+```puppet
+sum([0, 1, 2, 3], 100) => 106
+```
+
+##### Returns sum of String and Array of Strings.
+
+```puppet
+sum(['abc', 'def', 'ghi'], 'jkl') => 'jklabcdefghi'
+```
+
+#### `extended_stdlib::sum(Array[Variant[Numeric, String]] $the_array, Optional[Variant[Numeric, String]] $summand)`
+
+Returns the sum of an optional summand with all elements of an Array.
+
+Returns: `Variant[Numeric, String]`
+
+##### Examples
+
+###### Returns sum of Array of Integers.
+
+```puppet
+sum([0, 1, 2, 3]) => 6
+```
+
+###### Returns sum of Integer and Array of Integers.
+
+```puppet
+sum([0, 1, 2, 3], 100) => 106
+```
+
+###### Returns sum of String and Array of Strings.
+
+```puppet
+sum(['abc', 'def', 'ghi'], 'jkl') => 'jklabcdefghi'
+```
+
+##### `the_array`
+
+Data type: `Array[Variant[Numeric, String]]`
+
+The array to sum with an optional summand.
+
+##### `summand`
+
+Data type: `Optional[Variant[Numeric, String]]`
+
+The optional summand to sum with the Array elements.
+
+### <a name="extended_stdlibtranspose"></a>`extended_stdlib::transpose`
+
+Type: Ruby 4.x API
+
+Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
+
+#### Examples
+
+##### Returns 1x2 transposition of 2x1 nested Array.
+
+```puppet
+transpose([['a0', 'a1']]) => [['a0'], ['a1']]
+```
+
+##### Returns 3x2 transposition of 2x3 nested Array.
+
+```puppet
+transpose([['a0', 'a1'], ['b0', 'b1'], ['c0', 'c1']]) => [['a0', 'b0', 'c0'], ['a1', 'b1', 'c1']]
+```
+
+#### `extended_stdlib::transpose(Array *$arrays)`
+
+Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
+
+Returns: `Array[Array]` The nested Array containing the transposition of the Arrays' elements.
+
+##### Examples
+
+###### Returns 1x2 transposition of 2x1 nested Array.
+
+```puppet
+transpose([['a0', 'a1']]) => [['a0'], ['a1']]
+```
+
+###### Returns 3x2 transposition of 2x3 nested Array.
+
+```puppet
+transpose([['a0', 'a1'], ['b0', 'b1'], ['c0', 'c1']]) => [['a0', 'b0', 'c0'], ['a1', 'b1', 'c1']]
+```
+
+##### `*arrays`
+
+Data type: `Array`
+
+One or more equal-size Arrays of which to transpose. Issue with required_repeated_param in Puppet requires this to be nested Array.
+
+## Tasks
+
+### <a name="csr_attributes"></a>`csr_attributes`
+
+Modifies CSR attributes on a client server.
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `extension_requests`
+
+Data type: `Hash`
+
+The desired extension requests (permanent data to be embedded in a signed certificate). Note that input values will overwrite current values with the same paired key.
+
+##### `custom_attributes`
+
+Data type: `Hash`
+
+The desired custom attributes (transient data used for pre-validating requests). Note that input values will overwrite current values with the same paired key.
+
+##### `purge_extension_requests`
+
+Data type: `Boolean`
+
+Whether or not to purge the existing extension requests in the CSR attributes when updating.
+
+##### `purge_custom_attributes`
+
+Data type: `Boolean`
+
+Whether or not to purge the existing custom attributes in the CSR attributes instead when updating.
 

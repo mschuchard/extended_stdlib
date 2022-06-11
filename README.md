@@ -5,6 +5,7 @@
 - [Setup](#setup)
 - [Usage](#usage)
 - [Reference](#reference)
+  - [Facts](#facts)
 - [Limitations](#limitations)
 - [Contributing](#contributing)
 
@@ -29,6 +30,12 @@ These are all automatically loaded by Puppet via pluginsync.
 ## Reference
 
 Please see the [Reference](REFERENCE.md) for generated documentation.
+
+### Facts
+
+#### `subnet`
+
+Returns the ipv4-based subnet for the system.
 
 ## Limitations
 
