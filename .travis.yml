@@ -1,42 +1,31 @@
 ---
+dist: focal
 os: linux
-dist: bionic
 language: ruby
 cache: bundler
-before_install:
-  - bundle -v
-  - rm -f Gemfile.lock
-  - '[ -z "$RUBYGEMS_VERSION" ] || (yes || true) | gem update --system $RUBYGEMS_VERSION'
-  - gem --version
-  - bundle -v
-script:
-  - 'bundle exec rake $CHECK'
-bundler_args: --without system_tests
-rvm:
-  - 2.7
-stages:
-  - static
-  - spec
-  - acceptance
-  -
-    if: tag =~ ^v\d
-    name: deploy
-jobs:
-  fast_finish: true
-  include:
-    -
-      env: CHECK="validate lint check rubocop"
-      stage: static
-    -
-      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
-      rvm: 2.7
-      stage: spec
-    -
-      env: DEPLOY_TO_FORGE=yes
-      stage: deploy
+
 branches:
   only:
-    - main
-    - /^v\d/
+  - master
+
 notifications:
   email: false
+
+git:
+  depth: 5
+
+matrix:
+  include:
+  - rvm: 2.5
+    env: VERSION='~> 5.5.22'
+  - rvm: 2.7
+    env: VERSION='~> 6.27.1'
+  - rvm: 3.0
+    env: VERSION='~> 7.17.0'
+
+# execute tests
+install:
+- gem install --no-document -v "$VERSION" puppet
+- gem install --no-document puppet-check
+before_script: puppet --version
+script: puppet-check -s .
