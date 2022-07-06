@@ -1,0 +1,27 @@
+---
+version: 2.1
+
+jobs:
+  test:
+    parameters:
+      puppet_version:
+        type: string
+    working_directory: /tmp/project
+    docker:
+    - image: puppet/pdk
+    steps:
+    - checkout
+    - run:
+        name: execute unit tests
+        command: pdk test unit --puppet-version << parameters.puppet_version >>
+
+workflows:
+  execute_tests:
+    jobs:
+    - test:
+        matrix:
+          parameters:
+            puppet_version:
+            - '~> 5.5.22'
+            - '~> 6.27.1'
+            - '~> 7.17.0'

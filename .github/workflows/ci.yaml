@@ -25,6 +25,6 @@ jobs:
         ruby-version: ${{ matrix.ruby_version }}
         bundler-cache: true
     - name: install puppet check
-      run: bundle install puppet-check
+      run: gem install --no-document puppet-check
     - name: execute checks
       run: puppet-check -s .
