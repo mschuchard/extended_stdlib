@@ -19,7 +19,7 @@ Puppet::Functions.create_function(:"extended_stdlib::product") do
     if arrays.length == 1
       arrays
     else
-      arrays[0].product(*arrays[1...])
+      arrays[0].product(*arrays[1..-1])
     end
   end
 end
