@@ -32,7 +32,7 @@ plan extended_stdlib::csr_regenerate(
 
       # regenerate client certificate
       run_command("puppet infrastructure run regenerate_agent_certificate agent=${server}", $puppet_orchestrator, "regenerate client certificate on ${server}")
-    )
+    }
   }
   # aggregate results
   $csr_return = wait()
