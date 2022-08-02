@@ -1,3 +1,6 @@
+# 0.9.2
+- Release candidate release.
+
 # 0.9.1
 - Second beta release.
 

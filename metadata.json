@@ -1,6 +1,6 @@
 {
   "name": "mschuchard-extended_stdlib",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "author": "Matthew Schuchard",
   "summary": "An assortment of custom Puppet functions, facts, types and providers, tasks, and plans meant to supplement the stdlib module by Puppet.",
   "license": "MIT",

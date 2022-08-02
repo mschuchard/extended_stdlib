@@ -7,8 +7,9 @@
 ### Functions
 
 * [`extended_stdlib::compact`](#extended_stdlibcompact): Returns a hash or array with all of the undef value entries removed
+* [`extended_stdlib::decrypt_string`](#extended_stdlibdecrypt_string): Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
 * [`extended_stdlib::drop`](#extended_stdlibdrop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
-* [`extended_stdlib::intersect`](#extended_stdlibintersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to 
+* [`extended_stdlib::intersect`](#extended_stdlibintersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
 * [`extended_stdlib::minmax`](#extended_stdlibminmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
 * [`extended_stdlib::none`](#extended_stdlibnone): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
 * [`extended_stdlib::product`](#extended_stdlibproduct): Computes and returns all combinations of elements from all of the Arrays
@@ -20,6 +21,10 @@
 ### Tasks
 
 * [`csr_attributes`](#csr_attributes): Modifies CSR attributes on a client server.
+
+### Plans
+
+* [`extended_stdlib::csr_regenerate`](#extended_stdlibcsr_regenerate): This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the
 
 ## Functions
 
@@ -69,6 +74,52 @@ Data type: `Variant[Hash, Array]`
 
 The hash or array from which to remove the undef value entries.
 
+### <a name="extended_stdlibdecrypt_string"></a>`extended_stdlib::decrypt_string`
+
+Type: Ruby 4.x API
+
+Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
+
+#### Examples
+
+##### Decrypt an encrypted string and return it plain text.
+
+```puppet
+decrypt_string('/path/to/key.txt', '/path/to/nonce.txt', '/path/to/encrypted.txt') => foobar
+```
+
+#### `extended_stdlib::decrypt_string(Pattern[/\A\/([^\n\/\0]+\/*)*\z/] $key, Pattern[/\A\/([^\n\/\0]+\/*)*\z/] $nonce, String $encrypted)`
+
+Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
+
+Returns: `String` String Returns the encrypted string as decrypted in plain text.
+
+##### Examples
+
+###### Decrypt an encrypted string and return it plain text.
+
+```puppet
+decrypt_string('/path/to/key.txt', '/path/to/nonce.txt', '/path/to/encrypted.txt') => foobar
+```
+
+##### `key`
+
+Data type: `Pattern[/\A\/([^\n\/\0]+\/*)*\z/]`
+
+The path to the file containing the cipher key.
+
+##### `nonce`
+
+Data type: `Pattern[/\A\/([^\n\/\0]+\/*)*\z/]`
+
+The path to the file containing the cipher nonce.
+
+##### `encrypted`
+
+Data type: `String`
+
+The encrypted string to decrypt.
+
 ### <a name="extended_stdlibdrop"></a>`extended_stdlib::drop`
 
 Type: Ruby 4.x API
@@ -117,7 +168,7 @@ The number of first elements to remove from the array.
 
 Type: Ruby 4.x API
 
-Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to Ruby >= 3.0 requirement.
+Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
 
 #### Examples
 
@@ -130,7 +181,7 @@ intersect([1, 2, 3], [5, 6, 7]) => false
 
 #### `extended_stdlib::intersect(Array $a_array, Array $other_array)`
 
-Returns true if the array and other_array have at least one element in common, otherwise returns false. Will require Puppet version 8 due to Ruby >= 3.0 requirement.
+Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
 
 Returns: `Boolean` Returns whether the two arrays intersect.
 
@@ -209,6 +260,12 @@ Returns: `Boolean` Returns whether no elements satisfy a conditional (i.e. every
 none([undef, false]) => true
 none([undef, 0, false]) => false
 none([]) => true
+```
+
+###### Return whether there is an even numbered index that has a non String value ('2' element causes 'false' return by staisfying both conditionals)
+
+```puppet
+[key1, 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value !~ String } => false
 ```
 
 ##### `the_array`
@@ -596,4 +653,65 @@ Whether or not to purge the existing extension requests in the CSR attributes wh
 Data type: `Boolean`
 
 Whether or not to purge the existing custom attributes in the CSR attributes instead when updating.
+
+## Plans
+
+### <a name="extended_stdlibcsr_regenerate"></a>`extended_stdlib::csr_regenerate`
+
+This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the values from the CSR attributes.
+
+#### Parameters
+
+The following parameters are available in the `extended_stdlib::csr_regenerate` plan:
+
+* [`servers`](#servers)
+* [`puppet_orchestrator`](#puppet_orchestrator)
+* [`extension_requests`](#extension_requests)
+* [`custom_attributes`](#custom_attributes)
+* [`purge_extension_requests`](#purge_extension_requests)
+* [`purge_custom_attributes`](#purge_custom_attributes)
+
+##### <a name="servers"></a>`servers`
+
+Data type: `TargetSpec`
+
+The servers to target for CSR attribute modification.
+
+##### <a name="puppet_orchestrator"></a>`puppet_orchestrator`
+
+Data type: `TargetSpec`
+
+The server hosting the Puppet Orchestrator software for executing plans and tasks.
+
+##### <a name="extension_requests"></a>`extension_requests`
+
+Data type: `Hash`
+
+The desired extensions requests in the CSR attributes.
+
+Default value: `{}`
+
+##### <a name="custom_attributes"></a>`custom_attributes`
+
+Data type: `Hash`
+
+The desired custom attributes in the CSR attributes.
+
+Default value: `{}`
+
+##### <a name="purge_extension_requests"></a>`purge_extension_requests`
+
+Data type: `Boolean`
+
+Whether or not to purge the existing extension requests in the CSR attributes when updating.
+
+Default value: ``false``
+
+##### <a name="purge_custom_attributes"></a>`purge_custom_attributes`
+
+Data type: `Boolean`
+
+Whether or not to purge the existing custom attributes in the CSR attributes instead when updating.
+
+Default value: ``false``
 
