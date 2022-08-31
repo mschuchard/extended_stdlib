@@ -18,7 +18,7 @@ Puppet::Functions.create_function(:"extended_stdlib::intersect") do
     if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0')
       a_array.intersect?(other_array)
     else
-      Puppet.warning('This function is not supported in this version of Ruby.')
+      Puppet.warning('The intersect function is not supported in Ruby prior to version 3.0.')
       false
     end
   end

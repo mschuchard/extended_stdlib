@@ -262,10 +262,16 @@ none([undef, 0, false]) => false
 none([]) => true
 ```
 
-###### Return whether there is an even numbered index that has a non String value ('2' element causes 'false' return by staisfying both conditionals)
+###### Return whether there is an element with an even numbered index that has a String value (no element satisfies these conditions)
 
 ```puppet
-[key1, 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value !~ String } => false
+['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value =~ String } => false
+```
+
+###### Return whether there is an element with an even numbered index that does not have a String value (element at index 2 causes 'false' return by satisfying both conditionals)
+
+```puppet
+['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value !~ String } => false
 ```
 
 ##### `the_array`
