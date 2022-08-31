@@ -8,7 +8,7 @@ jobs:
         type: string
     working_directory: /tmp/project
     docker:
-    - image: puppet/pdk
+    - image: puppet/pdk:latest
     steps:
     - checkout
     - run:
