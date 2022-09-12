@@ -1,3 +1,6 @@
+# 1.0.0
+- Full initial release.
+
 # 0.9.2
 - Release candidate release.
 
