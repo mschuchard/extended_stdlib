@@ -7,8 +7,8 @@ Puppet::Functions.create_function(:"extended_stdlib::end_with") do
   # @return Boolean Whether or not the string ends with one of the given suffixes.
   # @example Check if the string ends with one of the suffixes.
   #   end_with('hello', ['ello']) => true
-  #   end_with('hello', ['heaven', 'ello'[]) => true
-  #   end_with('ello', ['heaven', 'paradise']) => false
+  #   end_with('hello', ['heaven', 'ello']) => true
+  #   end_with('hello', ['heaven', 'paradise']) => false
   dispatch :end_with do
     param 'String', :a_string
     param 'Array[String]', :suffixes
@@ -16,6 +16,6 @@ Puppet::Functions.create_function(:"extended_stdlib::end_with") do
   end
 
   def end_with(a_string, suffixes)
-    a_string.end_with?(suffixes)
+    a_string.end_with?(*suffixes)
   end
 end
