@@ -16,6 +16,6 @@ Puppet::Functions.create_function(:"extended_stdlib::ascii_only") do
   end
 
   def ascii_only(a_string, encoding = 'UTF-8')
-    a_string.force_encoding(encoding).ascii_only?
+    (+a_string).force_encoding(encoding).ascii_only?
   end
 end

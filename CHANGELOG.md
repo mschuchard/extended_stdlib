@@ -1,5 +1,5 @@
 # 1.1.0
-- Add functions: end_with, center.
+- Add functions: end_with, center, start_with, ascii_only.
 
 # 1.0.0
 - Full initial release.
