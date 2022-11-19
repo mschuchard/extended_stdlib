@@ -4,14 +4,20 @@ name: ci
 on:
   push:
     branches: [master]
+    paths:
+    - '**/*.pp'
+    - '**/*.rb'
   pull_request:
     branches: [master]
+    paths:
+    - '**/*.pp'
+    - '**/*.rb'
 
 jobs:
   lint:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-22.04]
         container: ['matthewschuchard/puppet-check:latest']
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
