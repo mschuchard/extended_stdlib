@@ -1,8 +1,8 @@
 {
   "name": "mschuchard-extended_stdlib",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Matthew Schuchard",
-  "summary": "An assortment of custom Puppet functions, facts, types and providers, tasks, and plans meant to supplement the stdlib module by Puppet.",
+  "summary": "An assortment of custom Puppet functions, facts, types and providers, defined resource types, tasks, and plans meant to supplement the stdlib module by Puppet.",
   "license": "MIT",
   "source": "https://github.com/mschuchard/extended_stdlib",
   "project_page": "https://github.com/mschuchard/extended_stdlib",
@@ -15,8 +15,7 @@
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "7",
-        "8",
-        "9"
+        "8"
       ]
     },
     {

@@ -15,7 +15,7 @@ This module provides an extra set of extensions and expanded functionality for P
 
 ## Module Description
 
-This Puppet module adds extra facts, functions, types and providers, and plans and tasks to Puppet. These should not overlap with the functionality provided by the `stdlib` module. These are also likely to be overall at least slightly less useful than those provided in `stdlib`.
+This Puppet module adds extra facts, functions, types and providers, defined resource types, tasks, and plans to Puppet. These should not overlap with the functionality provided by the `stdlib` module or core Puppet. These are also likely to be overall at least slightly less useful than those provided in `stdlib`.
 
 ## Setup
 

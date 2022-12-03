@@ -4,16 +4,25 @@
 
 ## Table of Contents
 
+### Defined types
+
+* [`extended_stdlib::script`](#extended_stdlibscript): Manages a script's existence in the directory of a system, and then executes the script if the script's attributes changed.
+
 ### Functions
 
+* [`extended_stdlib::ascii_only`](#extended_stdlibascii_only): Returns true for a string which has only ASCII characters, and false otherwise.
+* [`extended_stdlib::center`](#extended_stdlibcenter): Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with pads
 * [`extended_stdlib::compact`](#extended_stdlibcompact): Returns a hash or array with all of the undef value entries removed
 * [`extended_stdlib::decrypt_string`](#extended_stdlibdecrypt_string): Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
 * [`extended_stdlib::drop`](#extended_stdlibdrop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
+* [`extended_stdlib::end_with`](#extended_stdlibend_with): Returns true if the string ends with one of the suffixes given.
+* [`extended_stdlib::imperative`](#extended_stdlibimperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
 * [`extended_stdlib::intersect`](#extended_stdlibintersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
 * [`extended_stdlib::minmax`](#extended_stdlibminmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
 * [`extended_stdlib::none`](#extended_stdlibnone): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
 * [`extended_stdlib::product`](#extended_stdlibproduct): Computes and returns all combinations of elements from all of the Arrays
 * [`extended_stdlib::sample`](#extended_stdlibsample): Returns random elements from an Array. Note that the return is non-deterministic.
+* [`extended_stdlib::start_with`](#extended_stdlibstart_with): Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
 * [`extended_stdlib::subset`](#extended_stdlibsubset): Returns a boolean of whether the first hash is a subset of the second hash
 * [`extended_stdlib::sum`](#extended_stdlibsum): Returns the sum of an optional summand with all elements of an Array.
 * [`extended_stdlib::transpose`](#extended_stdlibtranspose): Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
@@ -26,7 +35,184 @@
 
 * [`extended_stdlib::csr_regenerate`](#extended_stdlibcsr_regenerate): This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the
 
+## Defined types
+
+### <a name="extended_stdlibscript"></a>`extended_stdlib::script`
+
+Manages a script's existence in the directory of a system, and then executes the script if the script's attributes changed.
+
+#### Examples
+
+##### Manages a script named 'myscript.sh' on the target system and sourced from the containing module, and then executes the script with the shell interpreter.
+
+```puppet
+extended_stdlib::script { 'myscript.sh': }
+```
+
+#### Parameters
+
+The following parameters are available in the `extended_stdlib::script` defined type:
+
+* [`script`](#script)
+* [`module`](#module)
+* [`file_attr`](#file_attr)
+* [`exec_attr`](#exec_attr)
+
+##### <a name="script"></a>`script`
+
+Data type: `String`
+
+The filename of the script to be managed and executed. Defaults to the title of the resource.
+
+Default value: `$title`
+
+##### <a name="module"></a>`module`
+
+Data type: `String`
+
+The module containing the script. Defaults to the module where this resource is declared.
+
+Default value: `$caller_module_name`
+
+##### <a name="file_attr"></a>`file_attr`
+
+Data type: `Hash`
+
+A hash of additional attribute => value pairs to append to the file resource that manages the script.
+
+Default value: `{}`
+
+##### <a name="exec_attr"></a>`exec_attr`
+
+Data type: `Hash`
+
+A hash of additional attribute => value pairs to append to the exec resource that execures the script.
+
+Default value: `{}`
+
 ## Functions
+
+### <a name="extended_stdlibascii_only"></a>`extended_stdlib::ascii_only`
+
+Type: Ruby 4.x API
+
+Returns true for a string which has only ASCII characters, and false otherwise.
+
+#### Examples
+
+##### Returns that a string is ASCII only.
+
+```puppet
+ascii_only('abc') => true
+```
+
+##### Returns that a string is not ASCII only.
+
+```puppet
+ascii_only('abc\u{6666}') => false
+```
+
+#### `extended_stdlib::ascii_only(String $a_string, Optional[String] $encoding)`
+
+Returns true for a string which has only ASCII characters, and false otherwise.
+
+Returns: `Boolean` Boolean Whether the string is ASCII only.
+
+##### Examples
+
+###### Returns that a string is ASCII only.
+
+```puppet
+ascii_only('abc') => true
+```
+
+###### Returns that a string is not ASCII only.
+
+```puppet
+ascii_only('abc\u{6666}') => false
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string to determine whether it is ASCII only.
+
+##### `encoding`
+
+Data type: `Optional[String]`
+
+The text encoding for the string.
+
+### <a name="extended_stdlibcenter"></a>`extended_stdlib::center`
+
+Type: Ruby 4.x API
+
+Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
+
+#### Examples
+
+##### Returns the string since width is smaller than the string.
+
+```puppet
+center('hello', 4) => 'hello'
+```
+
+##### Returns the centered string padded with empty string.
+
+```puppet
+center('hello', 20) => '       hello       '
+```
+
+##### Returns the centered string padded with '#-'.
+
+```puppet
+center('hello', 20, '#-') => '#-#-#-#hello#-#-#-#'
+```
+
+#### `extended_stdlib::center(String $a_string, Integer $width, Optional[String] $pad_string)`
+
+Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
+
+Returns: `String` String The resultant apdded string.
+
+##### Examples
+
+###### Returns the string since width is smaller than the string.
+
+```puppet
+center('hello', 4) => 'hello'
+```
+
+###### Returns the centered string padded with empty string.
+
+```puppet
+center('hello', 20) => '       hello       '
+```
+
+###### Returns the centered string padded with '#-'.
+
+```puppet
+center('hello', 20, '#-') => '#-#-#-#hello#-#-#-#'
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string to center in width with the pad_string.
+
+##### `width`
+
+Data type: `Integer`
+
+The width of the resultant padded string.
+
+##### `pad_string`
+
+Data type: `Optional[String]`
+
+The optional string to use for the surrounding padding.
 
 ### <a name="extended_stdlibcompact"></a>`extended_stdlib::compact`
 
@@ -163,6 +349,94 @@ The array to remove the first num elements from.
 Data type: `Integer`
 
 The number of first elements to remove from the array.
+
+### <a name="extended_stdlibend_with"></a>`extended_stdlib::end_with`
+
+Type: Ruby 4.x API
+
+Returns true if the string ends with one of the suffixes given.
+
+#### Examples
+
+##### Check if the string ends with one suffix.
+
+```puppet
+end_with('hello', ['ello']) => true
+```
+
+##### Check if the string ends with one of the suffixes.
+
+```puppet
+end_with('hello', ['heaven', 'ello']) => true
+end_with('hello', ['heaven', 'paradise']) => false
+```
+
+#### `extended_stdlib::end_with(String $a_string, Array[String] *$suffixes)`
+
+Returns true if the string ends with one of the suffixes given.
+
+Returns: `Boolean` Boolean Whether or not the string ends with one of the given suffixes.
+
+##### Examples
+
+###### Check if the string ends with one suffix.
+
+```puppet
+end_with('hello', ['ello']) => true
+```
+
+###### Check if the string ends with one of the suffixes.
+
+```puppet
+end_with('hello', ['heaven', 'ello']) => true
+end_with('hello', ['heaven', 'paradise']) => false
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string to check if it ends with one of the given suffixes.
+
+##### `*suffixes`
+
+Data type: `Array[String]`
+
+The suffixes to check for if the string ends.
+
+### <a name="extended_stdlibimperative"></a>`extended_stdlib::imperative`
+
+Type: Puppet Language
+
+THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
+
+#### Examples
+
+##### Consecutively apply package resources.
+
+```puppet
+extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
+```
+
+#### `extended_stdlib::imperative(Array[Resource] $resources)`
+
+The extended_stdlib::imperative function.
+
+Returns: `Undef`
+
+##### Examples
+
+###### Consecutively apply package resources.
+
+```puppet
+extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
+```
+
+##### `resources`
+
+Data type: `Array[Resource]`
+
+The array of resources to construe dependencies for imperative application.
 
 ### <a name="extended_stdlibintersect"></a>`extended_stdlib::intersect`
 
@@ -463,6 +737,72 @@ The Array from which to select random elements.
 Data type: `Optional[Integer]`
 
 The number of random elements to select from the Array.
+
+### <a name="extended_stdlibstart_with"></a>`extended_stdlib::start_with`
+
+Type: Ruby 4.x API
+
+Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
+
+#### Examples
+
+##### Check if the string begins with one String prefix.
+
+```puppet
+start_with('hello', ['hell']) => true
+```
+
+##### Check if the string begins with one Regexp prefix.
+
+```puppet
+start_with('hello', [/h/]) => true
+```
+
+##### Check if the string begins with one of the prefixes.
+
+```puppet
+start_with('hello', ['heaven', 'hell']) => true
+start_with('hello', ['heaven', 'paradise']) => false
+```
+
+#### `extended_stdlib::start_with(String $a_string, Array[Variant[String, Regexp]] *$prefixes)`
+
+Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
+
+Returns: `Boolean` Boolean Whether or not the string begins with one of the given prefixes.
+
+##### Examples
+
+###### Check if the string begins with one String prefix.
+
+```puppet
+start_with('hello', ['hell']) => true
+```
+
+###### Check if the string begins with one Regexp prefix.
+
+```puppet
+start_with('hello', [/h/]) => true
+```
+
+###### Check if the string begins with one of the prefixes.
+
+```puppet
+start_with('hello', ['heaven', 'hell']) => true
+start_with('hello', ['heaven', 'paradise']) => false
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string to check if it begins with one of the given prefixes.
+
+##### `*prefixes`
+
+Data type: `Array[Variant[String, Regexp]]`
+
+The prefixes to check for if the string begins.
 
 ### <a name="extended_stdlibsubset"></a>`extended_stdlib::subset`
 
