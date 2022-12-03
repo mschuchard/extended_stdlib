@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Returns true if the string starts with one of the prefixes given. Each prefix should be a String or Regexp.
+# Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
 Puppet::Functions.create_function(:"extended_stdlib::start_with") do
   # @param a_string The string to check if it begins with one of the given prefixes.
   # @param prefixes The prefixes to check for if the string begins.
