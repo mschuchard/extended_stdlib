@@ -1,3 +1,6 @@
+# 1.1.1 (Next)
+- Expand `script` DRT functionality.
+
 # 1.1.0
 - Add functions: end_with, center, start_with, ascii_only.
 - Add defined resource types: script.
