@@ -22,15 +22,25 @@ define extended_stdlib::script (
   String $module     = $caller_module_name,
   String $shell_path = '/bin/sh',
   String $stage_dir  = '/tmp',
+  Boolean $template  = false,
   Hash $file_attr    = {},
   Hash $exec_attr    = {}
 ) {
+  # manage script file
   file { "${stage_dir}/${script}":
     ensure => file,
-    source => "puppet:///modules/${module}/${script}",
     *      => $file_attr,
   }
+  # manage content as erb template
+  if $template {
+    File["${stage_dir}/${script}"] { content => template("${module}/${script}.erb") }
+  }
+  # manage content as static source
+  else {
+    File["${stage_dir}/${script}"] { source => "puppet:///modules/${module}/${script}" }
+  }
 
+  # execute script
   exec { "execute ${script} with ${shell_path}":
     command     => "${shell_path} /tmp/${script}",
     subscribe   => File["${stage_dir}/${script}"],
