@@ -19,10 +19,11 @@ Puppet::Functions.create_function(:"extended_stdlib::start_with") do
   end
 
   def start_with(a_string, prefixes)
-    # if prefixes.each { |prefix| prefix.instance_of? == 'Regexp' }
-    # warn
-    # else
-    a_string.start_with?(*prefixes)
-    # end
+    if prefixes.any?(Regexp) && Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.5')
+      Puppet.warning('Regular expression prefixes are not supported in Ruby prior to version 2.5.')
+      false
+    else
+      a_string.start_with?(*prefixes)
+    end
   end
 end
