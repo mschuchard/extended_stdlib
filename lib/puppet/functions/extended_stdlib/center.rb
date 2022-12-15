@@ -20,6 +20,6 @@ Puppet::Functions.create_function(:"extended_stdlib::center") do
   end
 
   def center(a_string, width, pad_string = nil)
-    pad_string.nil? ? a_string.center(width) : a_string.center(width, pad_string)
+    pad_string ? a_string.center(width, pad_string) : a_string.center(width)
   end
 end

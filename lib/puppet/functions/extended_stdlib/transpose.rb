@@ -9,7 +9,7 @@ Puppet::Functions.create_function(:"extended_stdlib::transpose") do
   # @example Returns 3x2 transposition of 2x3 nested Array.
   #   transpose([['a0', 'a1'], ['b0', 'b1'], ['c0', 'c1']]) => [['a0', 'b0', 'c0'], ['a1', 'b1', 'c1']]
   dispatch :transpose do
-    required_repeated_param 'Array', :arrays
+    required_repeated_param 'Array[NotUndef, 1]', :arrays
     return_type 'Array[Array]'
   end
 

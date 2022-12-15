@@ -19,6 +19,10 @@ Puppet::Functions.create_function(:"extended_stdlib::start_with") do
   end
 
   def start_with(a_string, prefixes)
+    # if prefixes.each { |prefix| prefix.instance_of? == 'Regexp' }
+    # warn
+    # else
     a_string.start_with?(*prefixes)
+    # end
   end
 end

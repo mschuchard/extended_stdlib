@@ -18,6 +18,6 @@ Puppet::Functions.create_function(:"extended_stdlib::sum") do
   end
 
   def sum(the_array, summand = nil)
-    summand.nil? ? the_array.sum : the_array.sum(summand)
+    summand ? the_array.sum(summand) : the_array.sum
   end
 end
