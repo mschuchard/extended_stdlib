@@ -15,6 +15,8 @@
 #   The path to the staging directory for managing the script file on the target system prior to execution.
 # @param source_file
 #   The filename of the source script file. Templates are handled automatically. Defaults to the script param.
+# @param epp_vars
+#   A hash of variable names and values to be passed as an argument to the epp function (if applicable).
 # @param file_attr
 #   A hash of additional attribute => value pairs to append to the file resource that manages the script.
 # @param exec_attr
@@ -25,21 +27,26 @@ define extended_stdlib::script (
   String $shell_path  = '/bin/sh',
   String $stage_dir   = '/tmp',
   String $source_file = $script,
+  Hash $epp_vars      = {},
   Hash $file_attr     = {},
   Hash $exec_attr     = {}
 ) {
-  # manage script file
-  file { "${stage_dir}/${script}":
-    ensure => file,
-    *      => $file_attr,
-  }
   # manage content as erb template
   if extended_stdlib::end_with($source_file, ['.erb']) {
-    File["${stage_dir}/${script}"] { content => template("${module}/${source_file}") }
+    $file_source = { content => template("${module}/${source_file}") }
+  }
+  # manage content as epp template
+  elsif extended_stdlib::end_with($source_file, ['.epp']) {
+    $file_source = { content => epp("${module}/${source_file}", $epp_vars) }
   }
   # manage content as static source
   else {
-    File["${stage_dir}/${script}"] { source => "puppet:///modules/${module}/${source_file}" }
+    $file_source = { source => "puppet:///modules/${module}/${source_file}" }
+  }
+  # manage script file
+  file { "${stage_dir}/${script}":
+    ensure => file,
+    *      => $file_attr + $file_source,
   }
 
   # execute script
