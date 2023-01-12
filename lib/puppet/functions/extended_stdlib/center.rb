@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
-Puppet::Functions.create_function(:"extended_stdlib::center") do
+Puppet::Functions.create_function(:'extended_stdlib::center') do
   # @param a_string The string to center in width with the pad_string.
   # @param width The width of the resultant padded string.
   # @param pad_string The optional string to use for the surrounding padding.

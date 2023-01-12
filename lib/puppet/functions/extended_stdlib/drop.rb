@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
-Puppet::Functions.create_function(:"extended_stdlib::drop") do
+Puppet::Functions.create_function(:'extended_stdlib::drop') do
   # @param the_array The array to remove the first num elements from.
   # @param num The number of first elements to remove from the array.
   # @return [Array] Returns the array with the first num elements removed.

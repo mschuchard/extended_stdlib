@@ -5,7 +5,7 @@ require 'puppet'
 require 'facter'
 
 # establish conf
-CONF = Facter.value(:kernel) == 'windows' ? 'C:\ProgramData\PuppetLabs\puppet\etc\csr_attributes.yaml' : '/etc/puppetlabs/puppet/csr_attributes.yaml'
+CONF = (Facter.value(:kernel) == 'windows') ? 'C:\ProgramData\PuppetLabs\puppet\etc\csr_attributes.yaml' : '/etc/puppetlabs/puppet/csr_attributes.yaml'
 # read in params and shallow symbolize keys
 PARAMS = JSON.parse($stdin.read).transform_keys(&:to_sym)
 # set default values

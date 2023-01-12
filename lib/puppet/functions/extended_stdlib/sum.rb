@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns the sum of an optional summand with all elements of an Array.
-Puppet::Functions.create_function(:"extended_stdlib::sum") do
+Puppet::Functions.create_function(:'extended_stdlib::sum') do
   # @param the_array The array to sum with an optional summand.
   # @param summand The optional summand to sum with the Array elements.
   # @return Variant[Numeric, String] The sum of the optional summand with the Array elements.

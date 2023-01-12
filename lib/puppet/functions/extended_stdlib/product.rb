@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Computes and returns all combinations of elements from all of the Arrays
-Puppet::Functions.create_function(:"extended_stdlib::product") do
+Puppet::Functions.create_function(:'extended_stdlib::product') do
   # @param arrays One or more Arrays of which to compute the products. Issue with required_repeated_param in Puppet requires this to be nested Array.
   # @return [Array[Array]] The nested Array containing the product of the Arrays' elements.
   # @example Returns original Array if only one is specified.

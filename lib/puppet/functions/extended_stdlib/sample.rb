@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns random elements from an Array. Note that the return is non-deterministic.
-Puppet::Functions.create_function(:"extended_stdlib::sample") do
+Puppet::Functions.create_function(:'extended_stdlib::sample') do
   # @param the_array The Array from which to select random elements.
   # @param num_elements The number of random elements to select from the Array.
   # @return [Variant[Array, Any]] The random element or Array of random elements selected from the Array.

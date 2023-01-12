@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined block input forms do not have code coverage at the moment.
-Puppet::Functions.create_function(:"extended_stdlib::none") do
+Puppet::Functions.create_function(:'extended_stdlib::none') do
   # @param the_array The array containing the elements to test the criterion upon. the_hash The hash containing the entries to test the criterion upon. block The optional lambda block to specify the criterion (otherwise directly tests falsiness).
   # @return [Boolean] Returns whether no elements satisfy a conditional (i.e. every element is falsey).
   # @example Return whether no element of any array is truthy.

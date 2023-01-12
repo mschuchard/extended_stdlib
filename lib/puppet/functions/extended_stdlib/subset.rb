@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns a boolean of whether the first hash is a subset of the second hash
-Puppet::Functions.create_function(:"extended_stdlib::subset") do
+Puppet::Functions.create_function(:'extended_stdlib::subset') do
   # @param a_hash The hash to determine if this hash is a subset of other_hash.
   # @param other_hash The hash to determine if hash is a subset of this hash.
   # @param proper Specifies if the subset determination should be for a proper subset or regular subset.

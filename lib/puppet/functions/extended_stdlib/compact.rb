@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns a hash or array with all of the undef value entries removed
-Puppet::Functions.create_function(:"extended_stdlib::compact") do
+Puppet::Functions.create_function(:'extended_stdlib::compact') do
   # @param hash_or_array The hash or array from which to remove the undef value entries.
   # @return [Variant[Hash, Array]] The hash or array with all of the undef value entries removed.
   # @example Input a hash and return it compacted.

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns true if the string ends with one of the suffixes given.
-Puppet::Functions.create_function(:"extended_stdlib::end_with") do
+Puppet::Functions.create_function(:'extended_stdlib::end_with') do
   # @param a_string The string to check if it ends with one of the given suffixes.
   # @param suffixes The suffixes to check for if the string ends.
   # @return Boolean Whether or not the string ends with one of the given suffixes.

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
-Puppet::Functions.create_function(:"extended_stdlib::decrypt_string") do
+Puppet::Functions.create_function(:'extended_stdlib::decrypt_string') do
   # @param key The path to the file containing the cipher key.
   # @param nonce The path to the file containing the cipher nonce.
   # @param encrypted The encrypted string to decrypt.
