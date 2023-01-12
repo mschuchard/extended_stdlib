@@ -6,7 +6,7 @@ jobs:
     parameters:
       puppet_version:
         type: string
-    working_directory: /tmp/project
+    working_directory: /tmp/extended_stdlib
     docker:
     - image: puppet/pdk:latest
     steps:
