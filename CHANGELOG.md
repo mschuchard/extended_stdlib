@@ -1,6 +1,7 @@
 # 1.1.1 (Next)
 - Expand `script` DRT functionality.
 - Improve and cleanup custom functions.
+- Expand `imperative` function experimental functionality.
 
 # 1.1.0
 - Add functions: end_with, center, start_with, ascii_only.
