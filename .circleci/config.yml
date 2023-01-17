@@ -12,6 +12,9 @@ jobs:
     steps:
     - checkout
     - run:
+        name: create empty templates dir for script unit test
+        command: mkdir templates
+    - run:
         name: execute unit tests
         command: pdk test unit --puppet-version << parameters.puppet_version >>
 

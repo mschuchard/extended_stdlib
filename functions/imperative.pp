@@ -6,10 +6,26 @@
 #
 # @example Consecutively apply package resources.
 #   extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
-function extended_stdlib::imperative(Array[Resource] $resources) >> Undef {
-  $resources.each |Integer $index, Resource $resource| {
-    if $index > 0 {
-      $resources[$index - 1] -> $resource
+function extended_stdlib::imperative(Variant[Hash, Array[Resource]] $resources) >> Undef {
+  case $resources {
+    Hash: {
+      #TODO: need resource type
+      keys($resources).each |Integer $index, String $resource_name| { if $index > 0 { Package[keys($resources)[$index - 1]] -> Package[$resource_name] } }
+
+      $resources.each |String $resource_title, Hash $attributes| {
+        Resource[package] {
+          $resource_title: * => $attributes;
+          default:         * => {};
+        }
+      }
     }
+    Array: {
+      $resources.each |Integer $index, Resource $resource| {
+        if $index > 0 {
+          $resources[$index - 1] -> $resource
+        }
+      }
+    }
+    default: { fail('Puppet type checker for imperative function bypassed somehow') }
   }
 }
