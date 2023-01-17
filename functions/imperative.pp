@@ -6,16 +6,22 @@
 #
 # @example Consecutively apply package resources.
 #   extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
-function extended_stdlib::imperative(Variant[Hash, Array[Resource]] $resources) >> Undef {
+function extended_stdlib::imperative(
+  Variant[Hash, Array[Resource]] $resources,
+  Regexp[/^[a-z]+$/] $type,
+  Optional[Hash] $defaults = {},
+) >> Undef {
   case $resources {
     Hash: {
-      #TODO: need resource type
-      keys($resources).each |Integer $index, String $resource_name| { if $index > 0 { Package[keys($resources)[$index - 1]] -> Package[$resource_name] } }
+      $resource_names = keys($resources)
+      $resource_names.each |Integer $index, String $resource_name| {
+        if $index > 0 { Resource[$type[$resource_names[$index - 1]]] -> Resource[$type[$resource_name]] }
+      }
 
       $resources.each |String $resource_title, Hash $attributes| {
-        Resource[package] {
+        Resource[$type] {
           $resource_title: * => $attributes;
-          default:         * => {};
+          default:         * => $defaults;
         }
       }
     }
