@@ -1,4 +1,4 @@
-# 1.1.1 (Next)
+# 1.1.1
 - Expand `script` DRT functionality.
 - Improve and cleanup custom functions.
 - Expand `imperative` function experimental functionality.

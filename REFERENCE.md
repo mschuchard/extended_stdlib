@@ -43,7 +43,7 @@ Manages a script's existence in the directory of a system, and then executes the
 
 #### Examples
 
-##### Manages a script named 'myscript.sh' on the target system and sourced from the containing module, and then executes the script with the shell interpreter.
+##### Manages a script named 'myscript.sh' on the target system and sourced from the containing module, and then executes the script with the default shell interpreter.
 
 ```puppet
 extended_stdlib::script { 'myscript.sh': }
@@ -55,6 +55,10 @@ The following parameters are available in the `extended_stdlib::script` defined 
 
 * [`script`](#script)
 * [`module`](#module)
+* [`shell_path`](#shell_path)
+* [`stage_dir`](#stage_dir)
+* [`source_file`](#source_file)
+* [`epp_vars`](#epp_vars)
 * [`file_attr`](#file_attr)
 * [`exec_attr`](#exec_attr)
 
@@ -73,6 +77,38 @@ Data type: `String`
 The module containing the script. Defaults to the module where this resource is declared.
 
 Default value: `$caller_module_name`
+
+##### <a name="shell_path"></a>`shell_path`
+
+Data type: `String`
+
+The path to the shell interpreter executable used for executing the managed script file.
+
+Default value: `'/bin/sh'`
+
+##### <a name="stage_dir"></a>`stage_dir`
+
+Data type: `String`
+
+The path to the staging directory for managing the script file on the target system prior to execution.
+
+Default value: `'/tmp'`
+
+##### <a name="source_file"></a>`source_file`
+
+Data type: `String`
+
+The filename of the source script file. Templates are handled automatically. Defaults to the script param.
+
+Default value: `$script`
+
+##### <a name="epp_vars"></a>`epp_vars`
+
+Data type: `Hash`
+
+A hash of variable names and values to be passed as an argument to the epp function (if applicable).
+
+Default value: `{}`
 
 ##### <a name="file_attr"></a>`file_attr`
 
@@ -142,7 +178,7 @@ The string to determine whether it is ASCII only.
 
 Data type: `Optional[String]`
 
-The text encoding for the string.
+The text encoding for the string (default: UTF-8).
 
 ### <a name="extended_stdlibcenter"></a>`extended_stdlib::center`
 
@@ -418,7 +454,17 @@ THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execu
 extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
 ```
 
-#### `extended_stdlib::imperative(Array[Resource] $resources)`
+##### Consecutively apply package resources at latest versions.
+
+```puppet
+extended_stdlib::imperative(
+  { 'first' => {}, 'second' => {}, 'third' => {} },
+  'package',
+  { 'ensure' => 'latest' }
+)
+```
+
+#### `extended_stdlib::imperative(Variant[Hash, Array[Resource]] $resources, Optional[Regexp[/^[a-z]+$/]] $type = '', Optional[Hash] $defaults = {})`
 
 The extended_stdlib::imperative function.
 
@@ -432,11 +478,33 @@ Returns: `Undef`
 extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
 ```
 
+###### Consecutively apply package resources at latest versions.
+
+```puppet
+extended_stdlib::imperative(
+  { 'first' => {}, 'second' => {}, 'third' => {} },
+  'package',
+  { 'ensure' => 'latest' }
+)
+```
+
 ##### `resources`
 
-Data type: `Array[Resource]`
+Data type: `Variant[Hash, Array[Resource]]`
 
-The array of resources to construe dependencies for imperative application.
+The hash of resource names and attributes, or array of resources, to construe dependencies for imperative application, and also to declare if input type is hash.
+
+##### `type`
+
+Data type: `Optional[Regexp[/^[a-z]+$/]]`
+
+The resource type to use for declaration if $resources is hash type.
+
+##### `defaults`
+
+Data type: `Optional[Hash]`
+
+The hash of default attributes to use for declaration if $resources is hash type.
 
 ### <a name="extended_stdlibintersect"></a>`extended_stdlib::intersect`
 
@@ -940,7 +1008,7 @@ transpose([['a0', 'a1']]) => [['a0'], ['a1']]
 transpose([['a0', 'a1'], ['b0', 'b1'], ['c0', 'c1']]) => [['a0', 'b0', 'c0'], ['a1', 'b1', 'c1']]
 ```
 
-#### `extended_stdlib::transpose(Array *$arrays)`
+#### `extended_stdlib::transpose(Array[NotUndef, 1] *$arrays)`
 
 Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
 
@@ -962,7 +1030,7 @@ transpose([['a0', 'a1'], ['b0', 'b1'], ['c0', 'c1']]) => [['a0', 'b0', 'c0'], ['
 
 ##### `*arrays`
 
-Data type: `Array`
+Data type: `Array[NotUndef, 1]`
 
 One or more equal-size Arrays of which to transpose. Issue with required_repeated_param in Puppet requires this to be nested Array.
 
