@@ -18,6 +18,6 @@ Puppet::Functions.create_function(:'extended_stdlib::truncate') do
   #   truncate(555) => 555
   #   truncate(555, 50) => 555
   def truncate(a_integer, num_digits = nil)
-    num_digits ? a_integer.truncate(a_integer, num_digits) : a_integer.truncate
+    num_digits ? a_integer.truncate(num_digits) : a_integer.truncate
   end
 end

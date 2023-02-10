@@ -1,3 +1,6 @@
+# 1.2.0 (Next)
+- Add functions: truncate.
+
 # 1.1.1
 - Expand `script` DRT functionality.
 - Improve and cleanup custom functions.
