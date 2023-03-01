@@ -1,5 +1,5 @@
 # 1.2.0 (Next)
-- Add functions: truncate, sqrt.
+- Add functions: truncate, exp, sqrt.
 
 # 1.1.1
 - Expand `script` DRT functionality.
