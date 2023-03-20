@@ -26,4 +26,4 @@ workflows:
           parameters:
             puppet_version:
             - '6.28.0'
-            - '7.21.0'
+            - '7.22.0'
