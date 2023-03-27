@@ -1,0 +1,11 @@
+---
+exclude_paths:
+  - spec/fixtures
+  - bin/puppet
+
+detectors:
+  TooManyStatements:
+    enabled: false
+
+  NilCheck:
+    enabled: false
