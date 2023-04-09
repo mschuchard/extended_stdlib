@@ -15,6 +15,6 @@ Puppet::Functions.create_function(:'extended_stdlib::log') do
   #   log(12, 3) => 2.2618595071429146
   #   log(1000, 10) => 2.9999999999999996
   def log(num, base = nil)
-    base.nil? ? Math.log(num) : Math.log(x, base)
+    base.nil? ? Math.log(num) : Math.log(num, base)
   end
 end

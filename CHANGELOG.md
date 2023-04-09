@@ -1,4 +1,4 @@
-# 1.2.0 (Next)
+# 1.2.0
 - Add functions: truncate, exp, log, next, sqrt, translate.
 - Add fact: powershell_version.
 

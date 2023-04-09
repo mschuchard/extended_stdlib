@@ -33,6 +33,10 @@ Please see the [Reference](REFERENCE.md) for generated documentation.
 
 ### Facts
 
+#### `powershell_version`
+
+Returns the semantic Powershell version on a Windows system.
+
 #### `subnet`
 
 Returns the ipv4-based subnet for the system.

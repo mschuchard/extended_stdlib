@@ -6,26 +6,32 @@
 
 ### Defined types
 
-* [`extended_stdlib::script`](#extended_stdlibscript): Manages a script's existence in the directory of a system, and then executes the script if the script's attributes changed.
+* [`extended_stdlib::script`](#extended_stdlib--script): Manages a script's existence in the directory of a system, and then executes the script if the script's attributes changed.
 
 ### Functions
 
-* [`extended_stdlib::ascii_only`](#extended_stdlibascii_only): Returns true for a string which has only ASCII characters, and false otherwise.
-* [`extended_stdlib::center`](#extended_stdlibcenter): Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with pads
-* [`extended_stdlib::compact`](#extended_stdlibcompact): Returns a hash or array with all of the undef value entries removed
-* [`extended_stdlib::decrypt_string`](#extended_stdlibdecrypt_string): Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
-* [`extended_stdlib::drop`](#extended_stdlibdrop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
-* [`extended_stdlib::end_with`](#extended_stdlibend_with): Returns true if the string ends with one of the suffixes given.
-* [`extended_stdlib::imperative`](#extended_stdlibimperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
-* [`extended_stdlib::intersect`](#extended_stdlibintersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
-* [`extended_stdlib::minmax`](#extended_stdlibminmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
-* [`extended_stdlib::none`](#extended_stdlibnone): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
-* [`extended_stdlib::product`](#extended_stdlibproduct): Computes and returns all combinations of elements from all of the Arrays
-* [`extended_stdlib::sample`](#extended_stdlibsample): Returns random elements from an Array. Note that the return is non-deterministic.
-* [`extended_stdlib::start_with`](#extended_stdlibstart_with): Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
-* [`extended_stdlib::subset`](#extended_stdlibsubset): Returns a boolean of whether the first hash is a subset of the second hash
-* [`extended_stdlib::sum`](#extended_stdlibsum): Returns the sum of an optional summand with all elements of an Array.
-* [`extended_stdlib::transpose`](#extended_stdlibtranspose): Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
+* [`extended_stdlib::ascii_only`](#extended_stdlib--ascii_only): Returns true for a string which has only ASCII characters, and false otherwise.
+* [`extended_stdlib::center`](#extended_stdlib--center): Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with pads
+* [`extended_stdlib::compact`](#extended_stdlib--compact): Returns a hash or array with all of the undef value entries removed
+* [`extended_stdlib::decrypt_string`](#extended_stdlib--decrypt_string): Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
+* [`extended_stdlib::drop`](#extended_stdlib--drop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
+* [`extended_stdlib::end_with`](#extended_stdlib--end_with): Returns true if the string ends with one of the suffixes given.
+* [`extended_stdlib::exp`](#extended_stdlib--exp): Returns e**x.
+* [`extended_stdlib::imperative`](#extended_stdlib--imperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
+* [`extended_stdlib::intersect`](#extended_stdlib--intersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
+* [`extended_stdlib::log`](#extended_stdlib--log): Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural
+* [`extended_stdlib::minmax`](#extended_stdlib--minmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
+* [`extended_stdlib::next`](#extended_stdlib--next): Returns the successor to the string. The successor is calculated by incrementing characters.
+* [`extended_stdlib::none`](#extended_stdlib--none): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
+* [`extended_stdlib::product`](#extended_stdlib--product): Computes and returns all combinations of elements from all of the Arrays
+* [`extended_stdlib::sample`](#extended_stdlib--sample): Returns random elements from an Array. Note that the return is non-deterministic.
+* [`extended_stdlib::sqrt`](#extended_stdlib--sqrt): Returns the non-negative square root of x.
+* [`extended_stdlib::start_with`](#extended_stdlib--start_with): Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
+* [`extended_stdlib::subset`](#extended_stdlib--subset): Returns a boolean of whether the first hash is a subset of the second hash
+* [`extended_stdlib::sum`](#extended_stdlib--sum): Returns the sum of an optional summand with all elements of an Array.
+* [`extended_stdlib::translate`](#extended_stdlib--translate): Replaces the characters in from_str with the characters in to_str. If to_str is shorter than from_str, then it is padded with its last charac
+* [`extended_stdlib::transpose`](#extended_stdlib--transpose): Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
+* [`extended_stdlib::truncate`](#extended_stdlib--truncate): Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at l
 
 ### Tasks
 
@@ -33,11 +39,11 @@
 
 ### Plans
 
-* [`extended_stdlib::csr_regenerate`](#extended_stdlibcsr_regenerate): This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the
+* [`extended_stdlib::csr_regenerate`](#extended_stdlib--csr_regenerate): This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the
 
 ## Defined types
 
-### <a name="extended_stdlibscript"></a>`extended_stdlib::script`
+### <a name="extended_stdlib--script"></a>`extended_stdlib::script`
 
 Manages a script's existence in the directory of a system, and then executes the script if the script's attributes changed.
 
@@ -53,16 +59,16 @@ extended_stdlib::script { 'myscript.sh': }
 
 The following parameters are available in the `extended_stdlib::script` defined type:
 
-* [`script`](#script)
-* [`module`](#module)
-* [`shell_path`](#shell_path)
-* [`stage_dir`](#stage_dir)
-* [`source_file`](#source_file)
-* [`epp_vars`](#epp_vars)
-* [`file_attr`](#file_attr)
-* [`exec_attr`](#exec_attr)
+* [`script`](#-extended_stdlib--script--script)
+* [`module`](#-extended_stdlib--script--module)
+* [`shell_path`](#-extended_stdlib--script--shell_path)
+* [`stage_dir`](#-extended_stdlib--script--stage_dir)
+* [`source_file`](#-extended_stdlib--script--source_file)
+* [`epp_vars`](#-extended_stdlib--script--epp_vars)
+* [`file_attr`](#-extended_stdlib--script--file_attr)
+* [`exec_attr`](#-extended_stdlib--script--exec_attr)
 
-##### <a name="script"></a>`script`
+##### <a name="-extended_stdlib--script--script"></a>`script`
 
 Data type: `String`
 
@@ -70,7 +76,7 @@ The filename of the script to be managed and executed. Defaults to the title of 
 
 Default value: `$title`
 
-##### <a name="module"></a>`module`
+##### <a name="-extended_stdlib--script--module"></a>`module`
 
 Data type: `String`
 
@@ -78,7 +84,7 @@ The module containing the script. Defaults to the module where this resource is 
 
 Default value: `$caller_module_name`
 
-##### <a name="shell_path"></a>`shell_path`
+##### <a name="-extended_stdlib--script--shell_path"></a>`shell_path`
 
 Data type: `String`
 
@@ -86,7 +92,7 @@ The path to the shell interpreter executable used for executing the managed scri
 
 Default value: `'/bin/sh'`
 
-##### <a name="stage_dir"></a>`stage_dir`
+##### <a name="-extended_stdlib--script--stage_dir"></a>`stage_dir`
 
 Data type: `String`
 
@@ -94,7 +100,7 @@ The path to the staging directory for managing the script file on the target sys
 
 Default value: `'/tmp'`
 
-##### <a name="source_file"></a>`source_file`
+##### <a name="-extended_stdlib--script--source_file"></a>`source_file`
 
 Data type: `String`
 
@@ -102,7 +108,7 @@ The filename of the source script file. Templates are handled automatically. Def
 
 Default value: `$script`
 
-##### <a name="epp_vars"></a>`epp_vars`
+##### <a name="-extended_stdlib--script--epp_vars"></a>`epp_vars`
 
 Data type: `Hash`
 
@@ -110,7 +116,7 @@ A hash of variable names and values to be passed as an argument to the epp funct
 
 Default value: `{}`
 
-##### <a name="file_attr"></a>`file_attr`
+##### <a name="-extended_stdlib--script--file_attr"></a>`file_attr`
 
 Data type: `Hash`
 
@@ -118,7 +124,7 @@ A hash of additional attribute => value pairs to append to the file resource tha
 
 Default value: `{}`
 
-##### <a name="exec_attr"></a>`exec_attr`
+##### <a name="-extended_stdlib--script--exec_attr"></a>`exec_attr`
 
 Data type: `Hash`
 
@@ -128,7 +134,7 @@ Default value: `{}`
 
 ## Functions
 
-### <a name="extended_stdlibascii_only"></a>`extended_stdlib::ascii_only`
+### <a name="extended_stdlib--ascii_only"></a>`extended_stdlib::ascii_only`
 
 Type: Ruby 4.x API
 
@@ -180,7 +186,7 @@ Data type: `Optional[String]`
 
 The text encoding for the string (default: UTF-8).
 
-### <a name="extended_stdlibcenter"></a>`extended_stdlib::center`
+### <a name="extended_stdlib--center"></a>`extended_stdlib::center`
 
 Type: Ruby 4.x API
 
@@ -250,7 +256,7 @@ Data type: `Optional[String]`
 
 The optional string to use for the surrounding padding.
 
-### <a name="extended_stdlibcompact"></a>`extended_stdlib::compact`
+### <a name="extended_stdlib--compact"></a>`extended_stdlib::compact`
 
 Type: Ruby 4.x API
 
@@ -296,7 +302,7 @@ Data type: `Variant[Hash, Array]`
 
 The hash or array from which to remove the undef value entries.
 
-### <a name="extended_stdlibdecrypt_string"></a>`extended_stdlib::decrypt_string`
+### <a name="extended_stdlib--decrypt_string"></a>`extended_stdlib::decrypt_string`
 
 Type: Ruby 4.x API
 
@@ -342,7 +348,7 @@ Data type: `String`
 
 The encrypted string to decrypt.
 
-### <a name="extended_stdlibdrop"></a>`extended_stdlib::drop`
+### <a name="extended_stdlib--drop"></a>`extended_stdlib::drop`
 
 Type: Ruby 4.x API
 
@@ -386,7 +392,7 @@ Data type: `Integer`
 
 The number of first elements to remove from the array.
 
-### <a name="extended_stdlibend_with"></a>`extended_stdlib::end_with`
+### <a name="extended_stdlib--end_with"></a>`extended_stdlib::end_with`
 
 Type: Ruby 4.x API
 
@@ -440,7 +446,25 @@ Data type: `Array[String]`
 
 The suffixes to check for if the string ends.
 
-### <a name="extended_stdlibimperative"></a>`extended_stdlib::imperative`
+### <a name="extended_stdlib--exp"></a>`extended_stdlib::exp`
+
+Type: Ruby 4.x API
+
+Returns e**x.
+
+#### `extended_stdlib::exp(Numeric $x)`
+
+Returns e**x.
+
+Returns: `Float`
+
+##### `x`
+
+Data type: `Numeric`
+
+
+
+### <a name="extended_stdlib--imperative"></a>`extended_stdlib::imperative`
 
 Type: Puppet Language
 
@@ -506,7 +530,7 @@ Data type: `Optional[Hash]`
 
 The hash of default attributes to use for declaration if $resources is hash type.
 
-### <a name="extended_stdlibintersect"></a>`extended_stdlib::intersect`
+### <a name="extended_stdlib--intersect"></a>`extended_stdlib::intersect`
 
 Type: Ruby 4.x API
 
@@ -548,7 +572,31 @@ Data type: `Array`
 
 The second array to determine if intersects.
 
-### <a name="extended_stdlibminmax"></a>`extended_stdlib::minmax`
+### <a name="extended_stdlib--log"></a>`extended_stdlib::log`
+
+Type: Ruby 4.x API
+
+Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural logarithm).
+
+#### `extended_stdlib::log(Numeric $num, Optional[Numeric] $base)`
+
+Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural logarithm).
+
+Returns: `Float`
+
+##### `num`
+
+Data type: `Numeric`
+
+
+
+##### `base`
+
+Data type: `Optional[Numeric]`
+
+
+
+### <a name="extended_stdlib--minmax"></a>`extended_stdlib::minmax`
 
 Type: Ruby 4.x API
 
@@ -582,7 +630,77 @@ Data type: `Array[Integer, 2]`
 
 The array of integers from which to return the minimum and maximum values.
 
-### <a name="extended_stdlibnone"></a>`extended_stdlib::none`
+### <a name="extended_stdlib--next"></a>`extended_stdlib::next`
+
+Type: Ruby 4.x API
+
+Returns the successor to the string. The successor is calculated by incrementing characters.
+
+#### Examples
+
+##### Increments the rightmost alphanumeric character, or the rightmost character.
+
+```puppet
+next('THX1138') => 'THX1139'
+next('<<koala>>') => '<<koalb>>'
+next('***') => '**+'
+```
+
+##### Increemnts a numeric character.
+
+```puppet
+next('00') => '01'
+next('09') => '10'
+next('99') => '100'
+```
+
+##### Increments an alphabetic character in the same case.
+
+```puppet
+next('aa') => 'ab'
+next('az') => 'ba'
+next('zz') => 'aaa'
+```
+
+#### `extended_stdlib::next(String $a_string)`
+
+Returns the successor to the string. The successor is calculated by incrementing characters.
+
+Returns: `String` String The next/successive string.
+
+##### Examples
+
+###### Increments the rightmost alphanumeric character, or the rightmost character.
+
+```puppet
+next('THX1138') => 'THX1139'
+next('<<koala>>') => '<<koalb>>'
+next('***') => '**+'
+```
+
+###### Increemnts a numeric character.
+
+```puppet
+next('00') => '01'
+next('09') => '10'
+next('99') => '100'
+```
+
+###### Increments an alphabetic character in the same case.
+
+```puppet
+next('aa') => 'ab'
+next('az') => 'ba'
+next('zz') => 'aaa'
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string in which to return the successor.
+
+### <a name="extended_stdlib--none"></a>`extended_stdlib::none`
 
 Type: Ruby 4.x API
 
@@ -694,7 +812,7 @@ Data type: `Callable[2,2]`
 
 
 
-### <a name="extended_stdlibproduct"></a>`extended_stdlib::product`
+### <a name="extended_stdlib--product"></a>`extended_stdlib::product`
 
 Type: Ruby 4.x API
 
@@ -752,7 +870,7 @@ Data type: `Array`
 
 One or more Arrays of which to compute the products. Issue with required_repeated_param in Puppet requires this to be nested Array.
 
-### <a name="extended_stdlibsample"></a>`extended_stdlib::sample`
+### <a name="extended_stdlib--sample"></a>`extended_stdlib::sample`
 
 Type: Ruby 4.x API
 
@@ -806,7 +924,25 @@ Data type: `Optional[Integer]`
 
 The number of random elements to select from the Array.
 
-### <a name="extended_stdlibstart_with"></a>`extended_stdlib::start_with`
+### <a name="extended_stdlib--sqrt"></a>`extended_stdlib::sqrt`
+
+Type: Ruby 4.x API
+
+Returns the non-negative square root of x.
+
+#### `extended_stdlib::sqrt(Numeric $x)`
+
+Returns the non-negative square root of x.
+
+Returns: `Float`
+
+##### `x`
+
+Data type: `Numeric`
+
+
+
+### <a name="extended_stdlib--start_with"></a>`extended_stdlib::start_with`
 
 Type: Ruby 4.x API
 
@@ -872,7 +1008,7 @@ Data type: `Array[Variant[String, Regexp]]`
 
 The prefixes to check for if the string begins.
 
-### <a name="extended_stdlibsubset"></a>`extended_stdlib::subset`
+### <a name="extended_stdlib--subset"></a>`extended_stdlib::subset`
 
 Type: Ruby 4.x API
 
@@ -924,7 +1060,7 @@ Data type: `Optional[Boolean]`
 
 Specifies if the subset determination should be for a proper subset or regular subset.
 
-### <a name="extended_stdlibsum"></a>`extended_stdlib::sum`
+### <a name="extended_stdlib--sum"></a>`extended_stdlib::sum`
 
 Type: Ruby 4.x API
 
@@ -988,7 +1124,57 @@ Data type: `Optional[Variant[Numeric, String]]`
 
 The optional summand to sum with the Array elements.
 
-### <a name="extended_stdlibtranspose"></a>`extended_stdlib::transpose`
+### <a name="extended_stdlib--translate"></a>`extended_stdlib::translate`
+
+Type: Ruby 4.x API
+
+Replaces the characters in from_str with the characters in to_str. If to_str is shorter than from_str, then it is padded with its last character in order to maintain the correspondence.
+
+#### Examples
+
+##### Replaces characters in the string 'hello'.
+
+```puppet
+translate('hello', 'el', 'ip') => 'hippo'
+translate('hello', 'aeiou', '*') => 'h*ll*'
+translate('hello', 'aeiou', 'AA*') => 'hAll*'
+```
+
+#### `extended_stdlib::translate(String $a_string, String $from_str, String $to_str)`
+
+Replaces the characters in from_str with the characters in to_str. If to_str is shorter than from_str, then it is padded with its last character in order to maintain the correspondence.
+
+Returns: `String` String The string with the characters replaced.
+
+##### Examples
+
+###### Replaces characters in the string 'hello'.
+
+```puppet
+translate('hello', 'el', 'ip') => 'hippo'
+translate('hello', 'aeiou', '*') => 'h*ll*'
+translate('hello', 'aeiou', 'AA*') => 'hAll*'
+```
+
+##### `a_string`
+
+Data type: `String`
+
+The string in which to replace the characters.
+
+##### `from_str`
+
+Data type: `String`
+
+The characters in the string to replace.
+
+##### `to_str`
+
+Data type: `String`
+
+The replacement characters for the string.
+
+### <a name="extended_stdlib--transpose"></a>`extended_stdlib::transpose`
 
 Type: Ruby 4.x API
 
@@ -1034,6 +1220,30 @@ Data type: `Array[NotUndef, 1]`
 
 One or more equal-size Arrays of which to transpose. Issue with required_repeated_param in Puppet requires this to be nested Array.
 
+### <a name="extended_stdlib--truncate"></a>`extended_stdlib::truncate`
+
+Type: Ruby 4.x API
+
+Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
+
+#### `extended_stdlib::truncate(Integer $a_integer, Optional[Integer] $num_digits)`
+
+Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
+
+Returns: `Integer`
+
+##### `a_integer`
+
+Data type: `Integer`
+
+
+
+##### `num_digits`
+
+Data type: `Optional[Integer]`
+
+
+
 ## Tasks
 
 ### <a name="csr_attributes"></a>`csr_attributes`
@@ -1070,7 +1280,7 @@ Whether or not to purge the existing custom attributes in the CSR attributes ins
 
 ## Plans
 
-### <a name="extended_stdlibcsr_regenerate"></a>`extended_stdlib::csr_regenerate`
+### <a name="extended_stdlib--csr_regenerate"></a>`extended_stdlib::csr_regenerate`
 
 This plan modifies the CSR attributes on servers, and then regenerates the client certificate on the servers to enable PuppetDB to update the values from the CSR attributes.
 
@@ -1078,26 +1288,26 @@ This plan modifies the CSR attributes on servers, and then regenerates the clien
 
 The following parameters are available in the `extended_stdlib::csr_regenerate` plan:
 
-* [`servers`](#servers)
-* [`puppet_orchestrator`](#puppet_orchestrator)
-* [`extension_requests`](#extension_requests)
-* [`custom_attributes`](#custom_attributes)
-* [`purge_extension_requests`](#purge_extension_requests)
-* [`purge_custom_attributes`](#purge_custom_attributes)
+* [`servers`](#-extended_stdlib--csr_regenerate--servers)
+* [`puppet_orchestrator`](#-extended_stdlib--csr_regenerate--puppet_orchestrator)
+* [`extension_requests`](#-extended_stdlib--csr_regenerate--extension_requests)
+* [`custom_attributes`](#-extended_stdlib--csr_regenerate--custom_attributes)
+* [`purge_extension_requests`](#-extended_stdlib--csr_regenerate--purge_extension_requests)
+* [`purge_custom_attributes`](#-extended_stdlib--csr_regenerate--purge_custom_attributes)
 
-##### <a name="servers"></a>`servers`
+##### <a name="-extended_stdlib--csr_regenerate--servers"></a>`servers`
 
 Data type: `TargetSpec`
 
 The servers to target for CSR attribute modification.
 
-##### <a name="puppet_orchestrator"></a>`puppet_orchestrator`
+##### <a name="-extended_stdlib--csr_regenerate--puppet_orchestrator"></a>`puppet_orchestrator`
 
 Data type: `TargetSpec`
 
 The server hosting the Puppet Orchestrator software for executing plans and tasks.
 
-##### <a name="extension_requests"></a>`extension_requests`
+##### <a name="-extended_stdlib--csr_regenerate--extension_requests"></a>`extension_requests`
 
 Data type: `Hash`
 
@@ -1105,7 +1315,7 @@ The desired extensions requests in the CSR attributes.
 
 Default value: `{}`
 
-##### <a name="custom_attributes"></a>`custom_attributes`
+##### <a name="-extended_stdlib--csr_regenerate--custom_attributes"></a>`custom_attributes`
 
 Data type: `Hash`
 
@@ -1113,19 +1323,19 @@ The desired custom attributes in the CSR attributes.
 
 Default value: `{}`
 
-##### <a name="purge_extension_requests"></a>`purge_extension_requests`
+##### <a name="-extended_stdlib--csr_regenerate--purge_extension_requests"></a>`purge_extension_requests`
 
 Data type: `Boolean`
 
 Whether or not to purge the existing extension requests in the CSR attributes when updating.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="purge_custom_attributes"></a>`purge_custom_attributes`
+##### <a name="-extended_stdlib--csr_regenerate--purge_custom_attributes"></a>`purge_custom_attributes`
 
 Data type: `Boolean`
 
 Whether or not to purge the existing custom attributes in the CSR attributes instead when updating.
 
-Default value: ``false``
+Default value: `false`
 
