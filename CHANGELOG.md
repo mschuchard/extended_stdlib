@@ -1,3 +1,6 @@
+# 1.2.1
+- Fixes for imperative function.
+
 # 1.2.0
 - Add functions: truncate, exp, log, next, sqrt, translate.
 - Add fact: powershell_version.
