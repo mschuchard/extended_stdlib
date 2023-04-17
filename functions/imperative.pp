@@ -15,7 +15,7 @@
 #     { 'ensure' => 'latest' }
 #   )
 function extended_stdlib::imperative(
-  Variant[Hash, Array[Type[Resource]]] $resources,
+  Variant[Hash, Array[Type[Resource], 2]] $resources,
   Optional[Pattern[/^[a-z]+$/]] $type = undef,
   Optional[Hash] $defaults            = {},
 ) >> Variant[Hash, Tuple] {
