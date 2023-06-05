@@ -12,7 +12,7 @@ Puppet::Functions.create_function(:'extended_stdlib::sqrt') do
   #   sqrt(4) => 2.0
   #   sqrt(2) => 1.4142135623731
   #   sqrt(9) => 3.0
-  def sqrt(x)
-    Math.sqrt(x)
+  def sqrt(num)
+    Math.sqrt(num)
   end
 end

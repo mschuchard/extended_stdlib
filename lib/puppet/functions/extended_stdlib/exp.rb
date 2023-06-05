@@ -12,7 +12,7 @@ Puppet::Functions.create_function(:'extended_stdlib::exp') do
   #   sqrt(0) => 1.0
   #   sqrt(1) => 2.718281828459045
   #   sqrt(1.5) => 4.4816890703380645
-  def exp(x)
-    Math.exp(x)
+  def exp(num)
+    Math.exp(num)
   end
 end
