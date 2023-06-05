@@ -8,7 +8,7 @@ jobs:
         type: string
     working_directory: /tmp/extended_stdlib
     docker:
-    - image: puppet/pdk:latest
+    - image: puppet/pdk
     steps:
     - checkout
     - run:

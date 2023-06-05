@@ -316,11 +316,11 @@ RSpec/ExpectChange:
   Enabled: false
 RSpec/ExpectInHook:
   Enabled: false
-RSpec/FactoryBot/AttributeDefinedStatically:
+FactoryBot/AttributeDefinedStatically:
   Enabled: false
-RSpec/FactoryBot/CreateList:
+FactoryBot/CreateList:
   Enabled: false
-RSpec/FactoryBot/FactoryClassName:
+FactoryBot/FactoryClassName:
   Enabled: false
 RSpec/HooksBeforeExamples:
   Enabled: false
