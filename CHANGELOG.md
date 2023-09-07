@@ -1,5 +1,6 @@
 # 1.2.1 (Next)
 - Fixes for imperative function.
+- Officially support Puppet 8.
 
 # 1.2.0
 - Add functions: truncate, exp, log, next, sqrt, translate.

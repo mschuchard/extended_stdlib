@@ -25,5 +25,5 @@ workflows:
         matrix:
           parameters:
             puppet_version:
-            - '6.28.0'
-            - '7.22.0'
+            - '7.26.0'
+            - '8.2.0'
