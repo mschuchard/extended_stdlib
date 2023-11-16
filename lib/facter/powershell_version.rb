@@ -1,3 +1,5 @@
+require 'facter'
+
 Facter.add(:powershell_version) do
   confine osfamily: %r{[wW]indows}
   setcode do
