@@ -15,14 +15,10 @@ on:
 
 jobs:
   lint:
-    strategy:
-      matrix:
-        os: [ubuntu-22.04]
-        container: ['matthewschuchard/puppet-check']
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
+    runs-on: ubuntu-22.04
+    container: matthewschuchard/puppet-check
     steps:
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: execute checks
       run: puppet-check -s .
