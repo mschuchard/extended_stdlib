@@ -3,6 +3,7 @@ require:
 - rubocop-performance
 - rubocop-rspec
 AllCops:
+  NewCops: enable
   DisplayCopNames: true
   TargetRubyVersion: '2.6'
   Include:
@@ -527,6 +528,8 @@ Lint/DuplicateBranch:
   Enabled: false
 Lint/DuplicateMagicComment:
   Enabled: false
+Lint/DuplicateMatchPattern:
+  Enabled: false
 Lint/DuplicateRegexpCharacterClassElement:
   Enabled: false
 Lint/EmptyBlock:
@@ -609,15 +612,15 @@ RSpec/NoExpectationExample:
   Enabled: false
 RSpec/PendingWithoutReason:
   Enabled: false
-RSpec/Rails/AvoidSetupHook:
+RSpecRails/AvoidSetupHook:
   Enabled: false
-RSpec/Rails/HaveHttpStatus:
+RSpecRails/HaveHttpStatus:
   Enabled: false
-RSpec/Rails/InferredSpecType:
+RSpecRails/InferredSpecType:
   Enabled: false
-RSpec/Rails/MinitestAssertions:
+RSpecRails/MinitestAssertions:
   Enabled: false
-RSpec/Rails/TravelAround:
+RSpecRails/TravelAround:
   Enabled: false
 RSpec/RedundantAround:
   Enabled: false
@@ -642,6 +645,8 @@ Style/CollectionCompact:
 Style/ComparableClamp:
   Enabled: false
 Style/ConcatArrayLiterals:
+  Enabled: false
+Style/DataInheritance:
   Enabled: false
 Style/DirEmpty:
   Enabled: false
@@ -710,6 +715,8 @@ Style/RedundantEach:
 Style/RedundantHeredocDelimiterQuotes:
   Enabled: false
 Style/RedundantInitialize:
+  Enabled: false
+Style/RedundantLineContinuation:
   Enabled: false
 Style/RedundantSelfAssignmentBranch:
   Enabled: false
