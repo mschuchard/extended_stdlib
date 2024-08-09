@@ -1,5 +1,6 @@
-# 1.2.1 (Next)
+# 1.2.1
 - Fixes for imperative function.
+- Update intersect function for removal in Ruby 3.0.
 - Officially support Puppet 8.
 
 # 1.2.0

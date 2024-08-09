@@ -18,7 +18,7 @@
 * [`extended_stdlib::end_with`](#extended_stdlib--end_with): Returns true if the string ends with one of the suffixes given.
 * [`extended_stdlib::exp`](#extended_stdlib--exp): Returns e**x.
 * [`extended_stdlib::imperative`](#extended_stdlib--imperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
-* [`extended_stdlib::intersect`](#extended_stdlib--intersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
+* [`extended_stdlib::intersect`](#extended_stdlib--intersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.1.
 * [`extended_stdlib::log`](#extended_stdlib--log): Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural
 * [`extended_stdlib::minmax`](#extended_stdlib--minmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
 * [`extended_stdlib::next`](#extended_stdlib--next): Returns the successor to the string. The successor is calculated by incrementing characters.
@@ -488,11 +488,11 @@ extended_stdlib::imperative(
 )
 ```
 
-#### `extended_stdlib::imperative(Variant[Hash, Array[Resource]] $resources, Optional[Regexp[/^[a-z]+$/]] $type = '', Optional[Hash] $defaults = {})`
+#### `extended_stdlib::imperative(Variant[Hash, Array[Type[Resource], 2]] $resources, Optional[Pattern[/^[a-z]+$/]] $type = undef, Optional[Hash] $defaults = {})`
 
 The extended_stdlib::imperative function.
 
-Returns: `Undef`
+Returns: `Variant[Hash, Tuple]`
 
 ##### Examples
 
@@ -514,15 +514,15 @@ extended_stdlib::imperative(
 
 ##### `resources`
 
-Data type: `Variant[Hash, Array[Resource]]`
+Data type: `Variant[Hash, Array[Type[Resource], 2]]`
 
 The hash of resource names and attributes, or array of resources, to construe dependencies for imperative application, and also to declare if input type is hash.
 
 ##### `type`
 
-Data type: `Optional[Regexp[/^[a-z]+$/]]`
+Data type: `Optional[Pattern[/^[a-z]+$/]]`
 
-The resource type to use for declaration if $resources is hash type.
+The resource type to use for declarations if $resources is hash type.
 
 ##### `defaults`
 
@@ -534,7 +534,7 @@ The hash of default attributes to use for declaration if $resources is hash type
 
 Type: Ruby 4.x API
 
-Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
+Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.1.
 
 #### Examples
 
@@ -547,7 +547,7 @@ intersect([1, 2, 3], [5, 6, 7]) => false
 
 #### `extended_stdlib::intersect(Array $a_array, Array $other_array)`
 
-Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.0.
+Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.1.
 
 Returns: `Boolean` Returns whether the two arrays intersect.
 
