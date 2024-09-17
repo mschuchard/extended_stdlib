@@ -42,3 +42,5 @@
 /.vscode/
 /.sync.yml
 /.devcontainer/
+/.circleci/
+/.github/
