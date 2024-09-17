@@ -294,7 +294,7 @@ Performance/UriDefaultParser:
   Enabled: false
 RSpec/Be:
   Enabled: false
-RSpec/Capybara/FeatureMethods:
+RSpec/Dialect:
   Enabled: false
 RSpec/ContainExactly:
   Enabled: false
