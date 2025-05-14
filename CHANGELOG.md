@@ -1,3 +1,6 @@
+# 1.3.0 (Next)
+- Add functions: http_get.
+
 # 1.2.1
 - Fixes for imperative function.
 - Update intersect function for removal in Ruby 3.0.
