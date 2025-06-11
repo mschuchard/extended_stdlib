@@ -1,5 +1,6 @@
 # 1.3.0 (Next)
 - Add functions: http_get.
+- Fix config file assignment in `csr_attributes` task.
 
 # 1.2.1
 - Fixes for imperative function.

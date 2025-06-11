@@ -4,8 +4,6 @@ require 'yaml'
 require 'puppet'
 require 'facter'
 
-# establish conf
-CONF = (Facter.value(:kernel) == 'windows') ? 'C:\ProgramData\PuppetLabs\puppet\etc\csr_attributes.yaml' : '/etc/puppetlabs/puppet/csr_attributes.yaml'
 # read in params and shallow symbolize keys
 PARAMS = JSON.parse($stdin.read).transform_keys(&:to_sym)
 # set default values
@@ -15,12 +13,15 @@ PARAMS[:purge_extension_requests] ||= false
 PARAMS[:purge_custom_attributes] ||= false
 
 def set_csr_attributes(extension_requests = {}, custom_attributes = {}, purge_extension_requests = false, purge_custom_attributes = false)
+  # establish conf
+  conf = (Facter.value(:kernel) == 'windows') ? 'C:\ProgramData\PuppetLabs\puppet\etc\csr_attributes.yaml' : '/etc/puppetlabs/puppet/csr_attributes.yaml'
+
   # initialize new csr attributes
   new_csr_attrs = {}
 
   # read in current csr attributes file and shallow symbolize keys
-  raise Puppet::Error, _("CSR attributes file at #{CONF} is unreadable.") unless File.readable?(CONF)
-  csr_attrs = YAML.safe_load(File.read(CONF)).transform_keys(&:to_sym)
+  raise Puppet::Error, _("CSR attributes file at #{conf} is unreadable.") unless File.readable?(conf)
+  csr_attrs = YAML.safe_load(File.read(conf)).transform_keys(&:to_sym)
 
   # append or override extension_requests depending upon purging
   new_csr_attrs[:extension_requests] = purge_extension_requests ? extension_requests : csr_attrs[:extension_requests].merge(extension_requests)
@@ -29,8 +30,8 @@ def set_csr_attributes(extension_requests = {}, custom_attributes = {}, purge_ex
   new_csr_attrs[:custom_attributes] = purge_custom_attributes ? custom_attributes : csr_attrs[:custom_attributes].merge(custom_attributes)
 
   # write updated csr attributes to yaml file in confdir
-  raise Puppet::Error, _("CSR attributes file at #{CONF} is unwritable.") unless File.writable?(CONF)
-  File.write(CONF, YAML.dump(new_csr_attrs.transform_keys(&:to_s)))
+  raise Puppet::Error, _("CSR attributes file at #{conf} is unwritable.") unless File.writable?(conf)
+  File.write(conf, YAML.dump(new_csr_attrs.transform_keys(&:to_s)))
 
   # construct return
   { status: 'Successfully modified CSR attributes' }
