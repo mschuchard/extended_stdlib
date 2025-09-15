@@ -18,7 +18,7 @@ function extended_stdlib::imperative(
   Variant[Hash, Array[Type[Resource], 2]] $resources,
   Optional[Pattern[/^[a-z]+$/]] $type = undef,
   Optional[Hash] $defaults            = {},
-) >> Variant[Hash, Tuple] {
+) >> Undef {
   # differentiate behavior based on $resources data type
   case $resources {
     # construe dependencies and declare resources
@@ -47,6 +47,11 @@ function extended_stdlib::imperative(
       # iterate through resources and construe consecutive resource dependencies
       $resources.each |Integer $index, Type[Resource] $resource| {
         if $index > 0 {
+          # validate resource is declared
+          if !defined($resource) {
+            err("The resource ${resource} is not declared and thus cannot be used with dependency mapping for imperative application")
+          }
+
           $resources[$index - 1] -> $resource
         }
       }
