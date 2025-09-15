@@ -3,6 +3,7 @@
 - Fix config file assignment in `csr_attributes` task.
 - Correct `imperative` return type and validate resource declaration when input type is Array.
 - Validate current `csr_attributes` exist (if necessary) in its task.
+- Fix `script` DRT `command` and add sane default for `file_attr`.
 
 # 1.2.1
 - Fixes for imperative function.

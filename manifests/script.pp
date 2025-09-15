@@ -28,7 +28,7 @@ define extended_stdlib::script (
   String $stage_dir   = '/tmp',
   String $source_file = $script,
   Hash $epp_vars      = {},
-  Hash $file_attr     = {},
+  Hash $file_attr     = { 'mode' => '0500'},
   Hash $exec_attr     = {}
 ) {
   # manage content as erb template
@@ -51,7 +51,7 @@ define extended_stdlib::script (
 
   # execute script
   exec { "execute ${script} with ${shell_path}":
-    command     => "${shell_path} /tmp/${script}",
+    command     => "${shell_path} ${stage_dir}/${script}",
     subscribe   => File["${stage_dir}/${script}"],
     refreshonly => true,
     *           => $exec_attr,
