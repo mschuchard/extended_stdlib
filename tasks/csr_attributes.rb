@@ -24,10 +24,20 @@ def set_csr_attributes(extension_requests = {}, custom_attributes = {}, purge_ex
   csr_attrs = YAML.safe_load(File.read(conf)).transform_keys(&:to_sym)
 
   # append or override extension_requests depending upon purging
-  new_csr_attrs[:extension_requests] = purge_extension_requests ? extension_requests : csr_attrs[:extension_requests].merge(extension_requests)
+  new_csr_attrs[:extension_requests] = if purge_extension_requests
+    extension_requests
+  else
+    raise Puppet::Error, _('extension_requests must be an existing Hash') unless csr_attrs[:extension_requests].is_a?(Hash)
+    csr_attrs[:extension_requests].merge(extension_requests)
+  end
 
   # append or override custom_attributes depending upon purging
-  new_csr_attrs[:custom_attributes] = purge_custom_attributes ? custom_attributes : csr_attrs[:custom_attributes].merge(custom_attributes)
+  new_csr_attrs[:custom_attributes] = if purge_custom_attributes
+    custom_attributes
+  else
+    raise Puppet::Error, _('custom_attributes must be an existing Hash') unless csr_attrs[:custom_attributes].is_a?(Hash)
+    csr_attrs[:custom_attributes].merge(custom_attributes)
+  end
 
   # write updated csr attributes to yaml file in confdir
   raise Puppet::Error, _("CSR attributes file at #{conf} is unwritable.") unless File.writable?(conf)

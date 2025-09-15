@@ -14,7 +14,7 @@ plan extended_stdlib::csr_regenerate(
   Boolean $purge_custom_attributes  = false,
 ) {
   # determine puppet_orchestrator target
-  $puppet_orchestrator = get_target($puppet_orchestrator)
+  $orchestrator = get_target($puppet_orchestrator)
 
   # execute csr update and cert regene
   get_targets($servers).each |Target $server| {
@@ -31,7 +31,7 @@ plan extended_stdlib::csr_regenerate(
       )
 
       # regenerate client certificate
-      run_command("puppet infrastructure run regenerate_agent_certificate agent=${server}", $puppet_orchestrator, "regenerate client certificate on ${server}")
+      run_command("puppet infrastructure run regenerate_agent_certificate agent=${server}", $orchestrator, "regenerate client certificate on ${server}")
     }
   }
   # aggregate results
