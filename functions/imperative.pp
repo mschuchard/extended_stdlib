@@ -4,7 +4,7 @@
 # @param type The resource type to use for declarations if $resources is hash type.
 # @param defaults The hash of default attributes to use for declaration if $resources is hash type.
 #
-# @return [Undef]
+# @return Variant[Hash, Tuple]
 #
 # @example Consecutively apply package resources.
 #   extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])
@@ -18,7 +18,7 @@ function extended_stdlib::imperative(
   Variant[Hash, Array[Type[Resource], 2]] $resources,
   Optional[Pattern[/^[a-z]+$/]] $type = undef,
   Optional[Hash] $defaults            = {},
-) >> Undef {
+) >> Variant[Hash, Tuple] {
   # differentiate behavior based on $resources data type
   case $resources {
     # construe dependencies and declare resources

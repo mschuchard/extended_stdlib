@@ -1,4 +1,4 @@
-# 1.3.0 (Next)
+# 1.3.0
 - Add functions: http_get.
 - Fix config file assignment in `csr_attributes` task.
 - Correct `imperative` return type and validate resource declaration when input type is Array.

@@ -1,6 +1,6 @@
 {
   "name": "mschuchard-extended_stdlib",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "author": "Matthew Schuchard",
   "summary": "An assortment of custom Puppet functions, facts, types and providers, defined resource types, tasks, and plans to supplement the stdlib module.",
   "license": "MIT",
@@ -20,16 +20,15 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "9",
         "10",
         "11",
-        "12"
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04",
         "20.04",
         "22.04",
         "24.04"

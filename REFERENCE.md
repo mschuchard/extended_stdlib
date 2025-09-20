@@ -17,6 +17,7 @@
 * [`extended_stdlib::drop`](#extended_stdlib--drop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
 * [`extended_stdlib::end_with`](#extended_stdlib--end_with): Returns true if the string ends with one of the suffixes given.
 * [`extended_stdlib::exp`](#extended_stdlib--exp): Returns e**x.
+* [`extended_stdlib::http_get`](#extended_stdlib--http_get): Sends a GET request and returns the HTTP response body as a hash.
 * [`extended_stdlib::imperative`](#extended_stdlib--imperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
 * [`extended_stdlib::intersect`](#extended_stdlib--intersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.1.
 * [`extended_stdlib::log`](#extended_stdlib--log): Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural
@@ -122,7 +123,7 @@ Data type: `Hash`
 
 A hash of additional attribute => value pairs to append to the file resource that manages the script.
 
-Default value: `{}`
+Default value: `{ 'mode' => '0500'}`
 
 ##### <a name="-extended_stdlib--script--exec_attr"></a>`exec_attr`
 
@@ -463,6 +464,64 @@ Returns: `Float`
 Data type: `Numeric`
 
 
+
+### <a name="extended_stdlib--http_get"></a>`extended_stdlib::http_get`
+
+Type: Ruby 4.x API
+
+Sends a GET request and returns the HTTP response body as a hash.
+
+#### Examples
+
+##### Returns a response body from a GET reqest.
+
+```puppet
+http_get('jsonplaceholder.typicode.com', '/todos/1') =>
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+```
+
+#### `extended_stdlib::http_get(String $hostname, String $path, Optional[Integer] $port)`
+
+Sends a GET request and returns the HTTP response body as a hash.
+
+Returns: `String` String The HTTP response body from the GET request.
+
+##### Examples
+
+###### Returns a response body from a GET reqest.
+
+```puppet
+http_get('jsonplaceholder.typicode.com', '/todos/1') =>
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+```
+
+##### `hostname`
+
+Data type: `String`
+
+The hostname for the endpoint.
+
+##### `path`
+
+Data type: `String`
+
+The path after the hostname for the endpoint.
+
+##### `port`
+
+Data type: `Optional[Integer]`
+
+The HTTP port for the endpoint (default: 80).
 
 ### <a name="extended_stdlib--imperative"></a>`extended_stdlib::imperative`
 
