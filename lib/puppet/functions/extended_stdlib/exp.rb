@@ -9,9 +9,9 @@ Puppet::Functions.create_function(:'extended_stdlib::exp') do
   # @param x The number of which to deteremine the exponential.
   # @return Float The non-negative exponential of the number.
   # @example Returns exponential.
-  #   sqrt(0) => 1.0
-  #   sqrt(1) => 2.718281828459045
-  #   sqrt(1.5) => 4.4816890703380645
+  #   exp(0) => 1.0
+  #   exp(1) => 2.718281828459045
+  #   exp(1.5) => 4.4816890703380645
   def exp(num)
     Math.exp(num)
   end

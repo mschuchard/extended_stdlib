@@ -2,7 +2,7 @@
 
 require 'net/http'
 
-# Sends a GET request and returns the HTTP response body as a hash.
+# Sends a GET request and returns the HTTP response body as a String.
 Puppet::Functions.create_function(:"extended_stdlib::http_get") do
   # @param hostname The hostname for the endpoint.
   # @param path The path after the hostname for the endpoint.

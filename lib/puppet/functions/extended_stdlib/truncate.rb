@@ -8,7 +8,7 @@ Puppet::Functions.create_function(:'extended_stdlib::truncate') do
     return_type 'Integer'
   end
   # @param a_integer The integer to truncate.
-  # @param a_integer The optional number of digits to truncate the integer (default: 0).
+  # @param num_digits The optional number of digits to truncate the integer (default: 0).
   # @return Integer The new integer after truncation to num_digits.
   # @example Returns truncated integer.
   #   truncate(555, -1) => 550

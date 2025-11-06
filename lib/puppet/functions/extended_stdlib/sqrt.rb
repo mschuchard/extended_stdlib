@@ -6,7 +6,7 @@ Puppet::Functions.create_function(:'extended_stdlib::sqrt') do
     param 'Numeric', :x
     return_type 'Float'
   end
-  # @param x The number of which to deteremine the square root.
+  # @param x The number of which to determine the square root.
   # @return Float The non-negative square root of the number.
   # @example Returns square root.
   #   sqrt(4) => 2.0

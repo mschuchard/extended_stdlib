@@ -5,7 +5,7 @@ Puppet::Functions.create_function(:'extended_stdlib::center') do
   # @param a_string The string to center in width with the pad_string.
   # @param width The width of the resultant padded string.
   # @param pad_string The optional string to use for the surrounding padding.
-  # @return String The resultant apdded string.
+  # @return String The resultant padded string.
   # @example Returns the string since width is smaller than the string.
   #   center('hello', 4) => 'hello'
   # @example Returns the centered string padded with empty string.

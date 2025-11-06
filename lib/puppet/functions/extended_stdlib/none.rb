@@ -9,7 +9,7 @@ Puppet::Functions.create_function(:'extended_stdlib::none') do
   #   none([undef, 0, false]) => false
   #   none([]) => true
   # @example Return whether there is an element with an even numbered index that has a String value (no element satisfies these conditions)
-  #   ['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value =~ String } => false
+  #   ['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value =~ String } => true
   # @example Return whether there is an element with an even numbered index that does not have a String value (element at index 2 causes 'false' return by satisfying both conditionals)
   #   ['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value !~ String } => false
   dispatch :array do

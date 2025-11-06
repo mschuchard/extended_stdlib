@@ -8,7 +8,7 @@ Puppet::Functions.create_function(:'extended_stdlib::next') do
   #   next('THX1138') => 'THX1139'
   #   next('<<koala>>') => '<<koalb>>'
   #   next('***') => '**+'
-  # @example Increemnts a numeric character.
+  # @example Increments a numeric character.
   #   next('00') => '01'
   #   next('09') => '10'
   #   next('99') => '100'
