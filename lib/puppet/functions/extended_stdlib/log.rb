@@ -7,7 +7,7 @@ Puppet::Functions.create_function(:'extended_stdlib::log') do
     optional_param 'Numeric', :base
     return_type 'Float'
   end
-  # @param x The number of which to deteremine the logarithm.
+  # @param x The number of which to deteremine the logarithm. This must be a positive number.
   # @param base The optional logarithm base (default: e).
   # @return Float The logarithm of the number.
   # @example Returns logarithm.
@@ -15,6 +15,7 @@ Puppet::Functions.create_function(:'extended_stdlib::log') do
   #   log(12, 3) => 2.2618595071429146
   #   log(1000, 10) => 2.9999999999999996
   def log(num, base = nil)
+    raise Puppet::Error, _('Number must be a positive number') if num <= 0
     base.nil? ? Math.log(num) : Math.log(num, base)
   end
 end

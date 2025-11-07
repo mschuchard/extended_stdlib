@@ -3,7 +3,7 @@
 # Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
 Puppet::Functions.create_function(:'extended_stdlib::center') do
   # @param a_string The string to center in width with the pad_string.
-  # @param width The width of the resultant padded string.
+  # @param width The width of the resultant padded string. This value must be non-negative.
   # @param pad_string The optional string to use for the surrounding padding.
   # @return String The resultant padded string.
   # @example Returns the string since width is smaller than the string.
@@ -20,6 +20,7 @@ Puppet::Functions.create_function(:'extended_stdlib::center') do
   end
 
   def center(a_string, width, pad_string = nil)
+    raise Puppet::Error, _('Width must be a non-negative integer') if width.negative?
     pad_string ? a_string.center(width, pad_string) : a_string.center(width)
   end
 end

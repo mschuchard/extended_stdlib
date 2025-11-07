@@ -16,6 +16,7 @@ Puppet::Functions.create_function(:'extended_stdlib::drop') do
   end
 
   def drop(the_array, num)
+    raise Puppet::Error, _('Number of elements must be a non-negative integer') if num.negative?
     the_array.drop(num)
   end
 end

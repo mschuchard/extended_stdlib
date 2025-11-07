@@ -1,3 +1,7 @@
+# 1.3.1 (Next)
+- Fix docstrings issues.
+- Input parameter validation for `drop`, `center`, and `log` functions.
+
 # 1.3.0
 - Add functions: http_get.
 - Fix config file assignment in `csr_attributes` task.
