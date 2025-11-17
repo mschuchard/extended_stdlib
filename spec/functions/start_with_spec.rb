@@ -7,7 +7,7 @@ describe 'extended_stdlib::start_with' do
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.5')
     it { is_expected.to run.with_params('hello', [%r{h}]).and_return(true) }
   else
-    it { is_expected.to run.with_params('hello', [%r{h}]).and_return(false) }
+    it { is_expected.to run.with_params('hello', [%r{h}]).and_raise_error(Puppet::Error, _('Regular expression prefixes are not supported in Ruby prior to version 2.5.')) }
   end
   it { is_expected.to run.with_params('hello', ['heaven', 'hell']).and_return(true) }
   it { is_expected.to run.with_params('hello', ['heaven', 'paradise']).and_return(false) }

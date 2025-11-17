@@ -1,6 +1,7 @@
 # 1.3.1 (Next)
 - Fix docstrings issues.
 - Input parameter validation for `drop`, `center`, and `log` functions.
+- Error when `intersect` and `start_with` are not supported in Ruby version.
 
 # 1.3.0
 - Add functions: http_get.
