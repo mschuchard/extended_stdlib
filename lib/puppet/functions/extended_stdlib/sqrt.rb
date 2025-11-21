@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-# Returns the non-negative square root of x.
+# Returns the non-negative square root of a number.
 Puppet::Functions.create_function(:'extended_stdlib::sqrt') do
   dispatch :sqrt do
-    param 'Numeric', :x
+    param 'Numeric', :num
     return_type 'Float'
   end
-  # @param x The non-negative number of which to determine the square root.
+  # @param num The non-negative number of which to determine the square root.
   # @return Float The non-negative square root of the number.
   # @example Returns square root.
   #   sqrt(4) => 2.0

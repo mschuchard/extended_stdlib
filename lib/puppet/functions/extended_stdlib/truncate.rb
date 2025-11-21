@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
+# Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
 Puppet::Functions.create_function(:'extended_stdlib::truncate') do
   dispatch :truncate do
     param 'Integer', :a_integer

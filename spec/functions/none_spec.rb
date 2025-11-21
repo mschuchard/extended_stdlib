@@ -18,4 +18,5 @@ describe 'extended_stdlib::none' do
       .with_lambda { |index, value| (index % 2) && value.is_a?(String) }
       .and_return(true)
   }
+  # TODO: combined block input forms
 end

@@ -1,3 +1,4 @@
+require 'openssl'
 # frozen_string_literal: true
 
 # Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
@@ -17,8 +18,6 @@ Puppet::Functions.create_function(:'extended_stdlib::decrypt_string') do
   end
 
   def decrypt_string(key, nonce, encrypted)
-    require 'openssl'
-
     # read in key and nonce files
     key = File.readable?(key) ? File.read(key) : (raise Puppet::Error, _('The key file is not an existing readable file.'))
     nonce = File.readable?(nonce) ? File.read(nonce) : (raise Puppet::Error, _('The nonce file is not an existing readable file.'))
