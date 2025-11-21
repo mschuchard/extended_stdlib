@@ -14,6 +14,14 @@ Puppet::Functions.create_function(:'extended_stdlib::transpose') do
   end
 
   def transpose(arrays)
+    # collect size of each array
+    sizes = arrays.map(&:size)
+
+    # validate all arrays are the same size
+    if sizes.uniq.size > 1
+      raise Puppet::Error, _("All arrays must be the same size. Found arrays with sizes: #{sizes.join(', ')}")
+    end
+
     arrays.transpose
   end
 end
