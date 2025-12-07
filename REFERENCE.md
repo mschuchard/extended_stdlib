@@ -17,22 +17,22 @@
 * [`extended_stdlib::drop`](#extended_stdlib--drop): Returns an Array containing all but the first num element of the array, where num is a non-negative Integer
 * [`extended_stdlib::end_with`](#extended_stdlib--end_with): Returns true if the string ends with one of the suffixes given.
 * [`extended_stdlib::exp`](#extended_stdlib--exp): Returns e**x.
-* [`extended_stdlib::http_get`](#extended_stdlib--http_get): Sends a GET request and returns the HTTP response body as a hash.
+* [`extended_stdlib::http_get`](#extended_stdlib--http_get): Sends a GET request and returns the HTTP response body as a String.
 * [`extended_stdlib::imperative`](#extended_stdlib--imperative): THIS FUNCTION IS CURRENTLY IN BETA. Puppet function to simulate imperative execution for a subset of resources by constructing iterative dependencies of each resource upon the previous resource. This thusly ensures consecutive resource application vis a vis imperative application instead of declarative.
 * [`extended_stdlib::intersect`](#extended_stdlib--intersect): Returns true if the array and other_array have at least one element in common, otherwise returns false. Requires Ruby >= 3.1.
 * [`extended_stdlib::log`](#extended_stdlib--log): Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural
 * [`extended_stdlib::minmax`](#extended_stdlib--minmax): Returns a new two element Array containing the minimum and maximum values from an array of integers
 * [`extended_stdlib::next`](#extended_stdlib--next): Returns the successor to the string. The successor is calculated by incrementing characters.
-* [`extended_stdlib::none`](#extended_stdlib--none): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined blo
+* [`extended_stdlib::none`](#extended_stdlib--none): Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion.
 * [`extended_stdlib::product`](#extended_stdlib--product): Computes and returns all combinations of elements from all of the Arrays
 * [`extended_stdlib::sample`](#extended_stdlib--sample): Returns random elements from an Array. Note that the return is non-deterministic.
-* [`extended_stdlib::sqrt`](#extended_stdlib--sqrt): Returns the non-negative square root of x.
+* [`extended_stdlib::sqrt`](#extended_stdlib--sqrt): Returns the non-negative square root of a number.
 * [`extended_stdlib::start_with`](#extended_stdlib--start_with): Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
 * [`extended_stdlib::subset`](#extended_stdlib--subset): Returns a boolean of whether the first hash is a subset of the second hash
 * [`extended_stdlib::sum`](#extended_stdlib--sum): Returns the sum of an optional summand with all elements of an Array.
 * [`extended_stdlib::translate`](#extended_stdlib--translate): Replaces the characters in from_str with the characters in to_str. If to_str is shorter than from_str, then it is padded with its last charac
 * [`extended_stdlib::transpose`](#extended_stdlib--transpose): Transposes the rows and columns in an Array of Arrays; the nested Arrays must all be the same size.
-* [`extended_stdlib::truncate`](#extended_stdlib--truncate): Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at l
+* [`extended_stdlib::truncate`](#extended_stdlib--truncate): Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at l
 
 ### Tasks
 
@@ -217,7 +217,7 @@ center('hello', 20, '#-') => '#-#-#-#hello#-#-#-#'
 
 Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
 
-Returns: `String` String The resultant apdded string.
+Returns: `String` String The resultant padded string.
 
 ##### Examples
 
@@ -249,7 +249,7 @@ The string to center in width with the pad_string.
 
 Data type: `Integer`
 
-The width of the resultant padded string.
+The width of the resultant padded string. This value must be non-negative.
 
 ##### `pad_string`
 
@@ -347,7 +347,7 @@ The path to the file containing the cipher nonce.
 
 Data type: `String`
 
-The encrypted string to decrypt.
+The path to the file containing the encrypted string to decrypt.
 
 ### <a name="extended_stdlib--drop"></a>`extended_stdlib::drop`
 
@@ -391,7 +391,7 @@ The array to remove the first num elements from.
 
 Data type: `Integer`
 
-The number of first elements to remove from the array.
+The number of first elements to remove from the array. This must be a non-negative Integer.
 
 ### <a name="extended_stdlib--end_with"></a>`extended_stdlib::end_with`
 
@@ -469,7 +469,7 @@ Data type: `Numeric`
 
 Type: Ruby 4.x API
 
-Sends a GET request and returns the HTTP response body as a hash.
+Sends a GET request and returns the HTTP response body as a String.
 
 #### Examples
 
@@ -487,7 +487,7 @@ http_get('jsonplaceholder.typicode.com', '/todos/1') =>
 
 #### `extended_stdlib::http_get(String $hostname, String $path, Optional[Integer] $port)`
 
-Sends a GET request and returns the HTTP response body as a hash.
+Sends a GET request and returns the HTTP response body as a String.
 
 Returns: `String` String The HTTP response body from the GET request.
 
@@ -705,7 +705,7 @@ next('<<koala>>') => '<<koalb>>'
 next('***') => '**+'
 ```
 
-##### Increemnts a numeric character.
+##### Increments a numeric character.
 
 ```puppet
 next('00') => '01'
@@ -737,7 +737,7 @@ next('<<koala>>') => '<<koalb>>'
 next('***') => '**+'
 ```
 
-###### Increemnts a numeric character.
+###### Increments a numeric character.
 
 ```puppet
 next('00') => '01'
@@ -763,7 +763,7 @@ The string in which to return the successor.
 
 Type: Ruby 4.x API
 
-Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion. Note that the combined block input forms do not have code coverage at the moment.
+Returns a boolean of whether no elements of an array, or array or hash with a lambda block meet a given criterion.
 
 #### `extended_stdlib::none(Array $the_array)`
 
@@ -784,7 +784,7 @@ none([]) => true
 ###### Return whether there is an element with an even numbered index that has a String value (no element satisfies these conditions)
 
 ```puppet
-['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value =~ String } => false
+['key1', 1, 2, 2].none |$index, $value| { $index % 2 == 0 and $value =~ String } => true
 ```
 
 ###### Return whether there is an element with an even numbered index that does not have a String value (element at index 2 causes 'false' return by satisfying both conditionals)
@@ -981,21 +981,21 @@ The Array from which to select random elements.
 
 Data type: `Optional[Integer]`
 
-The number of random elements to select from the Array.
+The non-negative number of random elements to select from the Array. This must be less than or equal to the size of the Array. If not provided, then a single random element is returned.
 
 ### <a name="extended_stdlib--sqrt"></a>`extended_stdlib::sqrt`
 
 Type: Ruby 4.x API
 
-Returns the non-negative square root of x.
+Returns the non-negative square root of a number.
 
-#### `extended_stdlib::sqrt(Numeric $x)`
+#### `extended_stdlib::sqrt(Numeric $num)`
 
-Returns the non-negative square root of x.
+Returns the non-negative square root of a number.
 
 Returns: `Float`
 
-##### `x`
+##### `num`
 
 Data type: `Numeric`
 
@@ -1283,11 +1283,11 @@ One or more equal-size Arrays of which to transpose. Issue with required_repeate
 
 Type: Ruby 4.x API
 
-Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
+Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
 
 #### `extended_stdlib::truncate(Integer $a_integer, Optional[Integer] $num_digits)`
 
-Returns integer truncated (toward zero) to a precision of num_digits decimal digits. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
+Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
 
 Returns: `Integer`
 

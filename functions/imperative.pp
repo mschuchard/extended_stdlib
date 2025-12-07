@@ -4,7 +4,7 @@
 # @param type The resource type to use for declarations if $resources is hash type.
 # @param defaults The hash of default attributes to use for declaration if $resources is hash type.
 #
-# @return Variant[Hash, Tuple]
+# @return Variant[Hash, Tuple] The consecutive dependency mapping with additionally resource declarations if the input type is Hash.
 #
 # @example Consecutively apply package resources.
 #   extended_stdlib::imperative([Package['first'], Package['second'], Package['third']])

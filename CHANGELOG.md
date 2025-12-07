@@ -1,4 +1,4 @@
-# 1.3.1 (Next)
+# 1.3.1
 - Fix docstrings issues.
 - Input parameter validation for `drop`, `center`, `sqrt`, `sample`, `transpose`, and `log` functions.
 - Error when `intersect` and `start_with` are not supported in Ruby version.
