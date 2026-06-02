@@ -1,3 +1,6 @@
+# 1.3.2 (Next)
+- Return informative string for `subnet` fact value instead of `nil` when determinaion fails.
+
 # 1.3.1
 - Fix docstrings issues.
 - Input parameter validation for `drop`, `center`, `sqrt`, `sample`, `transpose`, and `log` functions.
