@@ -1,5 +1,6 @@
 # 1.3.2 (Next)
 - Return informative string for `subnet` fact value instead of `nil` when determinaion fails.
+- Fail faster for usage errors in `imperative` function.
 
 # 1.3.1
 - Fix docstrings issues.

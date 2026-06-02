@@ -25,7 +25,7 @@ function extended_stdlib::imperative(
     Hash: {
       # ensure type is specified for this situation
       if empty($type) {
-        err("The type parameter must be specified for the imperative function if the 'resources' parameter type is 'Hash'")
+        fail("The type parameter must be specified for the imperative function if the 'resources' parameter type is 'Hash'")
       }
       # initializes resource names array
       $resource_names = keys($resources)
@@ -49,7 +49,7 @@ function extended_stdlib::imperative(
         if $index > 0 {
           # validate resource is declared
           if !defined($resource) {
-            err("The resource ${resource} is not declared and thus cannot be used with dependency mapping for imperative application")
+            fail("The resource ${resource} is not declared and thus cannot be used with dependency mapping for imperative application")
           }
 
           $resources[$index - 1] -> $resource
