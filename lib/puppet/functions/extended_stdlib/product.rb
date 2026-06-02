@@ -16,6 +16,6 @@ Puppet::Functions.create_function(:'extended_stdlib::product') do
   end
 
   def product(arrays)
-    arrays.one? ? arrays : arrays[0].product(*arrays[1..-1])
+    arrays.length == 1 ? arrays : arrays[0].product(*arrays[1..-1])
   end
 end

@@ -4,12 +4,12 @@ require 'net/http'
 
 # Sends a GET request and returns the HTTP response body as a String.
 Puppet::Functions.create_function(:"extended_stdlib::http_get") do
-  # @param hostname The hostname for the endpoint.
+  # @param hostname The hostname (URI optional) for the endpoint.
   # @param path The path after the hostname for the endpoint.
   # @param port The HTTP port for the endpoint (default: 80).
   # @return String The HTTP response body from the GET request.
   # @example Returns a response body from a GET reqest.
-  #   http_get('jsonplaceholder.typicode.com', '/todos/1') =>
+  #   http_get('http://jsonplaceholder.typicode.com', '/todos/1') =>
   #   {
   #     "userId": 1,
   #     "id": 1,
