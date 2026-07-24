@@ -5,7 +5,7 @@ Facter.add(:powershell_version) do
   setcode do
     # determine powershell version
     raw_version = Facter::Core::Execution.execute('powershell -command $PSVersionTable.PSVersion.ToString()')
-    version = %r{(\d+\.\d+\.\d+)}.match(raw_version)[0]
+    version = %r{(\d+\.\d+\.\d+)}.match(raw_version)[0] if !raw_version.nil?
 
     # validate powershell version
     if version.nil?

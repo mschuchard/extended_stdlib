@@ -6,7 +6,7 @@ Facter.add(:subnet) do
     ip_addr = Facter.value(:networking)['ip']
 
     # determine subnet if the ipv4 address is valid
-    if ip_addr.match?(%r{[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+}) then
+    if !ip_addr.nil? && ip_addr.match?(%r{[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+}) then
       %r{([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+}.match(ip_addr).captures[0]
     else
       Facter.warn('Something is wrong with the system ipv4 address. Verify the networking.ip fact for further details.')
