@@ -2,16 +2,17 @@
 
 # Returns e**x.
 Puppet::Functions.create_function(:'extended_stdlib::exp') do
-  dispatch :exp do
-    param 'Numeric', :x
-    return_type 'Float'
-  end
   # @param x The number of which to deteremine the exponential.
   # @return Float The non-negative exponential of the number.
   # @example Returns exponential.
   #   exp(0) => 1.0
   #   exp(1) => 2.718281828459045
   #   exp(1.5) => 4.4816890703380645
+  dispatch :exp do
+    param 'Numeric', :x
+    return_type 'Float'
+  end
+
   def exp(num)
     Math.exp(num)
   end
