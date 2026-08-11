@@ -4,7 +4,7 @@
 Puppet::Functions.create_function(:'extended_stdlib::start_with') do
   # @param a_string The string to check if it begins with one of the given prefixes.
   # @param prefixes The prefixes to check for if the string begins.
-  # @return Boolean Whether or not the string begins with one of the given prefixes.
+  # @return [Boolean] Whether or not the string begins with one of the given prefixes.
   # @example Check if the string begins with one String prefix.
   #   start_with('hello', ['hell']) => true
   # @example Check if the string begins with one Regexp prefix.

@@ -4,7 +4,7 @@
 Puppet::Functions.create_function(:'extended_stdlib::ascii_only') do
   # @param a_string The string to determine whether it is ASCII only.
   # @param encoding The text encoding for the string (default: UTF-8).
-  # @return Boolean Whether the string is ASCII only.
+  # @return [Boolean] Whether the string is ASCII only.
   # @example Returns that a string is ASCII only.
   #   ascii_only('abc') => true
   # @example Returns that a string is not ASCII only.

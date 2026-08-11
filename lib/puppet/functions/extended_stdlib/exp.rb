@@ -3,7 +3,7 @@
 # Returns e**x.
 Puppet::Functions.create_function(:'extended_stdlib::exp') do
   # @param x The number of which to deteremine the exponential.
-  # @return Float The non-negative exponential of the number.
+  # @return [Float] The non-negative exponential of the number.
   # @example Returns exponential.
   #   exp(0) => 1.0
   #   exp(1) => 2.718281828459045

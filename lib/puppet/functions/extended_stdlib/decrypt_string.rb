@@ -6,7 +6,7 @@ Puppet::Functions.create_function(:'extended_stdlib::decrypt_string') do
   # @param key The path to the file containing the cipher key.
   # @param nonce The path to the file containing the cipher nonce.
   # @param encrypted The encrypted string to decrypt.
-  # @return String Returns the encrypted string as decrypted in plain text.
+  # @return [String] Returns the encrypted string as decrypted in plain text.
   # @example Decrypt an encrypted string and return it plain text.
   #   decrypt_string('/path/to/key.txt', '/path/to/nonce.txt', '/path/to/encrypted.txt') => foobar
   dispatch :decrypt_string do

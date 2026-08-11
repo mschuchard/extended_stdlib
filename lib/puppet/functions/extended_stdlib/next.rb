@@ -3,7 +3,7 @@
 # Returns the successor to the string. The successor is calculated by incrementing characters.
 Puppet::Functions.create_function(:'extended_stdlib::next') do
   # @param a_string The string in which to return the successor.
-  # @return String The next/successive string.
+  # @return [String] The next/successive string.
   # @example Increments the rightmost alphanumeric character, or the rightmost character.
   #   next('THX1138') => 'THX1139'
   #   next('<<koala>>') => '<<koalb>>'

@@ -5,7 +5,7 @@ Puppet::Functions.create_function(:'extended_stdlib::translate') do
   # @param a_string The string in which to replace the characters.
   # @param from_str The characters in the string to replace.
   # @param to_str The replacement characters for the string.
-  # @return String The string with the characters replaced.
+  # @return [String] The string with the characters replaced.
   # @example Replaces characters in the string 'hello'.
   #   translate('hello', 'el', 'ip') => 'hippo'
   #   translate('hello', 'aeiou', '*') => 'h*ll*'

@@ -4,7 +4,7 @@
 Puppet::Functions.create_function(:'extended_stdlib::sum') do
   # @param the_array The array to sum with an optional summand.
   # @param summand The optional summand to sum with the Array elements.
-  # @return Variant[Numeric, String] The sum of the optional summand with the Array elements.
+  # @return [Variant[Numeric, String]] The sum of the optional summand with the Array elements.
   # @example Returns sum of Array of Integers.
   #   sum([0, 1, 2, 3]) => 6
   # @example Returns sum of Integer and Array of Integers.
