@@ -10,7 +10,7 @@ Facter.add(:powershell_version) do
     # validate powershell version
     if version.nil?
       Facter.warn 'Powershell version could not be determined and will be set to 0.0.0'
-      '0.0.0'
+      return '0.0.0'
     end
     version
   rescue Facter::Core::Execution::ExecutionFailure

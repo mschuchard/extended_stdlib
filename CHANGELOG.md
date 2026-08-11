@@ -2,6 +2,8 @@
 - Return informative string for `subnet` fact value instead of `nil` when determinaion fails.
 - Fail faster for usage errors in `imperative` function.
 - Safeguard `powershell_version` determination.
+- Validate first resource in `imperative` function.
+- Safeguard `key` and `nonce` file I/O in `decrypt_string` function.
 
 # 1.3.1
 - Fix docstrings issues.

@@ -46,12 +46,12 @@ function extended_stdlib::imperative(
     Array[Type[Resource]]: {
       # iterate through resources and construe consecutive resource dependencies
       $resources.each |Integer $index, Type[Resource] $resource| {
+        # validate resource is declared
+        if !defined($resource) {
+          fail("The resource ${resource} is not declared and thus cannot be used with dependency mapping for imperative application")
+        }
+        # construct sequential dependency
         if $index > 0 {
-          # validate resource is declared
-          if !defined($resource) {
-            fail("The resource ${resource} is not declared and thus cannot be used with dependency mapping for imperative application")
-          }
-
           $resources[$index - 1] -> $resource
         }
       }
