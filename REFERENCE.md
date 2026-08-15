@@ -159,7 +159,7 @@ ascii_only('abc\u{6666}') => false
 
 Returns true for a string which has only ASCII characters, and false otherwise.
 
-Returns: `Boolean` Boolean Whether the string is ASCII only.
+Returns: `Boolean` Whether the string is ASCII only.
 
 ##### Examples
 
@@ -217,7 +217,7 @@ center('hello', 20, '#-') => '#-#-#-#hello#-#-#-#'
 
 Centers a string in width. If the width is greater than the length of the string, then the string is centered by padding and padded with padstring; otherwise the string is returnd.
 
-Returns: `String` String The resultant padded string.
+Returns: `String` The resultant padded string.
 
 ##### Examples
 
@@ -321,7 +321,7 @@ decrypt_string('/path/to/key.txt', '/path/to/nonce.txt', '/path/to/encrypted.txt
 
 Returns a decrypted String using the AES-256-CBC OpenSSL cipher algorithm.
 
-Returns: `String` String Returns the encrypted string as decrypted in plain text.
+Returns: `String` Returns the encrypted string as decrypted in plain text.
 
 ##### Examples
 
@@ -347,7 +347,7 @@ The path to the file containing the cipher nonce.
 
 Data type: `String`
 
-The path to the file containing the encrypted string to decrypt.
+The encrypted string to decrypt.
 
 ### <a name="extended_stdlib--drop"></a>`extended_stdlib::drop`
 
@@ -418,7 +418,7 @@ end_with('hello', ['heaven', 'paradise']) => false
 
 Returns true if the string ends with one of the suffixes given.
 
-Returns: `Boolean` Boolean Whether or not the string ends with one of the given suffixes.
+Returns: `Boolean` Whether or not the string ends with one of the given suffixes.
 
 ##### Examples
 
@@ -453,17 +453,37 @@ Type: Ruby 4.x API
 
 Returns e**x.
 
+#### Examples
+
+##### Returns exponential.
+
+```puppet
+exp(0) => 1.0
+exp(1) => 2.718281828459045
+exp(1.5) => 4.4816890703380645
+```
+
 #### `extended_stdlib::exp(Numeric $x)`
 
 Returns e**x.
 
-Returns: `Float`
+Returns: `Float` The non-negative exponential of the number.
+
+##### Examples
+
+###### Returns exponential.
+
+```puppet
+exp(0) => 1.0
+exp(1) => 2.718281828459045
+exp(1.5) => 4.4816890703380645
+```
 
 ##### `x`
 
 Data type: `Numeric`
 
-
+The number of which to deteremine the exponential.
 
 ### <a name="extended_stdlib--http_get"></a>`extended_stdlib::http_get`
 
@@ -476,7 +496,7 @@ Sends a GET request and returns the HTTP response body as a String.
 ##### Returns a response body from a GET reqest.
 
 ```puppet
-http_get('jsonplaceholder.typicode.com', '/todos/1') =>
+http_get('http://jsonplaceholder.typicode.com', '/todos/1') =>
 {
   "userId": 1,
   "id": 1,
@@ -489,14 +509,14 @@ http_get('jsonplaceholder.typicode.com', '/todos/1') =>
 
 Sends a GET request and returns the HTTP response body as a String.
 
-Returns: `String` String The HTTP response body from the GET request.
+Returns: `String` The HTTP response body from the GET request.
 
 ##### Examples
 
 ###### Returns a response body from a GET reqest.
 
 ```puppet
-http_get('jsonplaceholder.typicode.com', '/todos/1') =>
+http_get('http://jsonplaceholder.typicode.com', '/todos/1') =>
 {
   "userId": 1,
   "id": 1,
@@ -509,7 +529,7 @@ http_get('jsonplaceholder.typicode.com', '/todos/1') =>
 
 Data type: `String`
 
-The hostname for the endpoint.
+The hostname (URI optional) for the endpoint.
 
 ##### `path`
 
@@ -551,7 +571,7 @@ extended_stdlib::imperative(
 
 The extended_stdlib::imperative function.
 
-Returns: `Variant[Hash, Tuple]`
+Returns: `Variant[Hash, Tuple]` The consecutive dependency mapping with additionally resource declarations if the input type is Hash.
 
 ##### Examples
 
@@ -637,23 +657,43 @@ Type: Ruby 4.x API
 
 Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural logarithm).
 
+#### Examples
+
+##### Returns logarithm.
+
+```puppet
+log(1) => 0.0
+log(12, 3) => 2.2618595071429146
+log(1000, 10) => 2.9999999999999996
+```
+
 #### `extended_stdlib::log(Numeric $num, Optional[Numeric] $base)`
 
 Returns the logarithm of x. If an additional second argument is given, then it will be the logarithm base. Otherwise it is e (for the natural logarithm).
 
-Returns: `Float`
+Returns: `Float` The logarithm of the number.
+
+##### Examples
+
+###### Returns logarithm.
+
+```puppet
+log(1) => 0.0
+log(12, 3) => 2.2618595071429146
+log(1000, 10) => 2.9999999999999996
+```
 
 ##### `num`
 
 Data type: `Numeric`
 
-
+The number of which to deteremine the logarithm. This must be a positive number.
 
 ##### `base`
 
 Data type: `Optional[Numeric]`
 
-
+The optional logarithm base (default: e). This must be positive and cannot be 0.
 
 ### <a name="extended_stdlib--minmax"></a>`extended_stdlib::minmax`
 
@@ -725,7 +765,7 @@ next('zz') => 'aaa'
 
 Returns the successor to the string. The successor is calculated by incrementing characters.
 
-Returns: `String` String The next/successive string.
+Returns: `String` The next/successive string.
 
 ##### Examples
 
@@ -989,17 +1029,37 @@ Type: Ruby 4.x API
 
 Returns the non-negative square root of a number.
 
+#### Examples
+
+##### Returns square root.
+
+```puppet
+sqrt(4) => 2.0
+sqrt(2) => 1.4142135623731
+sqrt(9) => 3.0
+```
+
 #### `extended_stdlib::sqrt(Numeric $num)`
 
 Returns the non-negative square root of a number.
 
-Returns: `Float`
+Returns: `Float` The non-negative square root of the number.
+
+##### Examples
+
+###### Returns square root.
+
+```puppet
+sqrt(4) => 2.0
+sqrt(2) => 1.4142135623731
+sqrt(9) => 3.0
+```
 
 ##### `num`
 
 Data type: `Numeric`
 
-
+The non-negative number of which to determine the square root.
 
 ### <a name="extended_stdlib--start_with"></a>`extended_stdlib::start_with`
 
@@ -1032,7 +1092,7 @@ start_with('hello', ['heaven', 'paradise']) => false
 
 Returns true if the string starts with one of the prefixes given. Each prefix should be a String or (Ruby >= 2.5) Regexp.
 
-Returns: `Boolean` Boolean Whether or not the string begins with one of the given prefixes.
+Returns: `Boolean` Whether or not the string begins with one of the given prefixes.
 
 ##### Examples
 
@@ -1149,7 +1209,7 @@ sum(['abc', 'def', 'ghi'], 'jkl') => 'jklabcdefghi'
 
 Returns the sum of an optional summand with all elements of an Array.
 
-Returns: `Variant[Numeric, String]`
+Returns: `Variant[Numeric, String]` The sum of the optional summand with the Array elements.
 
 ##### Examples
 
@@ -1203,7 +1263,7 @@ translate('hello', 'aeiou', 'AA*') => 'hAll*'
 
 Replaces the characters in from_str with the characters in to_str. If to_str is shorter than from_str, then it is padded with its last character in order to maintain the correspondence.
 
-Returns: `String` String The string with the characters replaced.
+Returns: `String` The string with the characters replaced.
 
 ##### Examples
 
@@ -1285,23 +1345,57 @@ Type: Ruby 4.x API
 
 Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
 
+#### Examples
+
+##### Returns truncated integer.
+
+```puppet
+truncate(555, -1) => 550
+truncate(555, -2) => 500
+truncate(-555, -2) => -500
+```
+
+##### Returns same integer.
+
+```puppet
+truncate(555) => 555
+truncate(555, 50) => 555
+```
+
 #### `extended_stdlib::truncate(Integer $a_integer, Optional[Integer] $num_digits)`
 
 Returns integer truncated (toward zero) to a precision of num_digits decimal points. When num_digits is negative, the returned value has at least abs(num_digits) trailing zeros. Returns same integer when num_digits is zero or positive.
 
-Returns: `Integer`
+Returns: `Integer` The new integer after truncation to num_digits.
+
+##### Examples
+
+###### Returns truncated integer.
+
+```puppet
+truncate(555, -1) => 550
+truncate(555, -2) => 500
+truncate(-555, -2) => -500
+```
+
+###### Returns same integer.
+
+```puppet
+truncate(555) => 555
+truncate(555, 50) => 555
+```
 
 ##### `a_integer`
 
 Data type: `Integer`
 
-
+The integer to truncate.
 
 ##### `num_digits`
 
 Data type: `Optional[Integer]`
 
-
+The optional number of digits to truncate the integer (default: 0).
 
 ## Tasks
 
